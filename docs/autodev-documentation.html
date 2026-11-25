@@ -1,0 +1,1527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AutoDev — Technical Documentation</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 16mm 16mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    color: #1b1714;
+    background: #ffffff;
+    font-family: "Segoe UI", -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 9.6pt;
+    line-height: 1.55;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    color: #14110f;
+    margin: 0;
+    break-after: avoid;
+  }
+  h1 { font-size: 24pt; line-height: 1.15; letter-spacing: -0.01em; }
+  h2 {
+    font-size: 15.5pt;
+    margin: 11mm 0 6mm 0;
+    padding-bottom: 2.4mm;
+    border-bottom: 1.4pt solid #14110f;
+    break-before: auto;
+  }
+  h2.nobreak { margin-top: 0; }
+  h2.startpage { break-before: page; margin-top: 0; }
+  h3 { font-size: 11.6pt; margin: 6.5mm 0 2.2mm; }
+  h4 { font-size: 10pt; margin: 5mm 0 1.6mm; }
+  p { margin: 0 0 2.6mm; }
+  ul, ol { margin: 0 0 3mm 0; padding-left: 5.2mm; }
+  li { margin-bottom: 1.3mm; }
+  strong { color: #14110f; }
+  code, pre {
+    font-family: "Cascadia Mono", Consolas, "SF Mono", "Liberation Mono", monospace;
+    font-size: 8.3pt;
+  }
+  code { background: #f3eee6; padding: 0.4mm 1.1mm; border-radius: 1.2mm; }
+  pre {
+    background: #14110f;
+    color: #ece5d8;
+    padding: 3.5mm 4mm;
+    border-radius: 1.6mm;
+    overflow: hidden;
+    white-space: pre-wrap;
+    line-height: 1.45;
+    margin: 2mm 0 4mm;
+    break-inside: avoid;
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: 8pt; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2mm 0 4.5mm;
+    font-size: 8.5pt;
+    line-height: 1.4;
+  }
+  thead { display: table-header-group; }
+  th {
+    text-align: left;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.3pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #5c5348;
+    border-bottom: 1pt solid #a99f90;
+    padding: 1.8mm 2mm;
+    vertical-align: bottom;
+  }
+  td {
+    border-bottom: 0.4pt solid #e2dbcf;
+    padding: 1.8mm 2mm;
+    vertical-align: top;
+  }
+  tr { break-inside: avoid; }
+  .eyebrow {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.4pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #b8431c;
+    margin-bottom: 2mm;
+  }
+  .lead { font-size: 11pt; line-height: 1.55; color: #3b342d; margin-bottom: 5mm; }
+  .small { font-size: 8.2pt; color: #5c5348; }
+  .muted { color: #6b6156; }
+  .rule { height: 0.6pt; background: #ddd5c8; margin: 5mm 0; }
+  .callout {
+    border-left: 2.4pt solid #b8431c;
+    background: #faf6ee;
+    padding: 3.2mm 4mm;
+    margin: 3mm 0 4.5mm;
+    break-inside: avoid;
+  }
+  .callout .label {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.2pt;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b8431c;
+    display: block;
+    margin-bottom: 1mm;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+  .card {
+    border: 0.5pt solid #d8d0c3;
+    padding: 3.4mm 4mm;
+    break-inside: avoid;
+  }
+  .card h4 { margin-top: 0; }
+  .card p:last-child { margin-bottom: 0; }
+  .toc { margin-top: 4mm; }
+  .toc div {
+    display: flex;
+    gap: 4mm;
+    padding: 1.5mm 0;
+    border-bottom: 0.4pt dotted #cfc6b8;
+    font-size: 9.2pt;
+  }
+  .toc span.n {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 8pt;
+    color: #b8431c;
+    width: 10mm;
+    flex: none;
+    padding-top: 0.4mm;
+  }
+  /* cover */
+  .cover {
+    background: #14110f;
+    color: #f7f2e8;
+    margin: 0;
+    padding: 20mm 13mm 13mm;
+    height: 259mm;
+    position: relative;
+    break-after: page;
+  }
+  .cover .mark {
+    display: inline-block;
+    background: #c8491f;
+    color: #14110f;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-weight: 700;
+    font-size: 12pt;
+    letter-spacing: 0.02em;
+    padding: 2mm 2.6mm;
+  }
+  .cover .eyebrow { color: #c8491f; margin-top: 24mm; }
+  .cover h1 { color: #f7f2e8; font-size: 40pt; line-height: 1.02; max-width: 150mm; }
+  .cover .sub {
+    color: #bdb2a1;
+    font-size: 12.5pt;
+    line-height: 1.5;
+    max-width: 132mm;
+    margin-top: 8mm;
+  }
+  .cover .meta {
+    position: absolute;
+    left: 13mm; right: 13mm; bottom: 14mm;
+    border-top: 0.6pt solid #453d34;
+    padding-top: 5mm;
+    display: flex;
+    justify-content: space-between;
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.6pt;
+    letter-spacing: 0.06em;
+    color: #9a8f80;
+    text-transform: uppercase;
+  }
+  .cover .contents-mini { margin-top: 14mm; font-size: 9pt; color: #bdb2a1; }
+  .docmeta { display: grid; grid-template-columns: 34mm 1fr; gap: 1.5mm 5mm; font-size: 9pt; margin: 4mm 0 6mm; }
+  .docmeta dt { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.4pt; letter-spacing: 0.08em; text-transform: uppercase; color: #6b6156; padding-top: 0.7mm; }
+  .docmeta dd { margin: 0; }
+  .kicker { font-family: "Cascadia Mono", Consolas, monospace; font-size: 7.4pt; letter-spacing: 0.1em; text-transform: uppercase; color: #b8431c; }
+  .ascii {
+    font-family: "Cascadia Mono", Consolas, monospace;
+    font-size: 7.4pt;
+    line-height: 1.35;
+    white-space: pre;
+    background: #f7f3eb;
+    border: 0.5pt solid #ded5c6;
+    padding: 4mm;
+    margin: 2mm 0 4mm;
+    color: #241f1a;
+    break-inside: avoid;
+  }
+  .avoid { break-inside: avoid; }
+  footer.note { margin-top: 6mm; padding-top: 2.5mm; border-top: 0.5pt solid #ddd5c8; font-size: 7.8pt; color: #6b6156; }
+</style>
+</head>
+<body>
+
+<!-- ============================== COVER ============================== -->
+<div class="cover">
+  <span class="mark">AD</span>
+  <div class="eyebrow">Technical documentation · v0.1.0</div>
+  <h1>AutoDev</h1>
+  <div class="sub">
+    An autonomous coding agent that turns issues into tested, validated, human-approved
+    pull requests — and never asks you to trust a model's word for it.
+  </div>
+  <div class="contents-mini">
+    Core idea · System architecture · Execution methodology · Technology rationale ·<br>
+    Security model · Data model · API · Frontend · Deployment · Verification
+  </div>
+  <div class="meta">
+    <span>AutoDev / Engineering</span>
+    <span>Complete project documentation</span>
+    <span>November 2026</span>
+  </div>
+</div>
+
+<!-- ============================== CONTENTS ============================== -->
+<h2 class="nobreak">Contents</h2>
+<div class="toc">
+  <div><span class="n">01</span><span>Executive summary — what this system is and what it refuses to be</span></div>
+  <div><span class="n">02</span><span>The problem and the core idea</span></div>
+  <div><span class="n">03</span><span>System architecture at a glance</span></div>
+  <div><span class="n">04</span><span>Methodology: the eleven-stage execution pipeline</span></div>
+  <div><span class="n">05</span><span>Technology decisions and why each one was made</span></div>
+  <div><span class="n">06</span><span>Backend architecture in depth</span></div>
+  <div><span class="n">07</span><span>The agent: provider abstraction, context, editing, correction</span></div>
+  <div><span class="n">08</span><span>Human-in-the-loop: state machine and approval gates</span></div>
+  <div><span class="n">09</span><span>Security model and threat analysis</span></div>
+  <div><span class="n">10</span><span>Demo mode: why deterministic fixtures exist</span></div>
+  <div><span class="n">11</span><span>Data model and persistence</span></div>
+  <div><span class="n">12</span><span>API design</span></div>
+  <div><span class="n">13</span><span>Frontend architecture and design language</span></div>
+  <div><span class="n">14</span><span>The sandbox worker</span></div>
+  <div><span class="n">15</span><span>Configuration reference</span></div>
+  <div><span class="n">16</span><span>Deployment: local, Docker, production</span></div>
+  <div><span class="n">17</span><span>Testing and quality strategy</span></div>
+  <div><span class="n">18</span><span>Limitations, trade-offs and honest gaps</span></div>
+  <div><span class="n">19</span><span>Extension points and future work</span></div>
+  <div><span class="n">20</span><span>Appendix: repository map, glossary, verification record</span></div>
+</div>
+
+<div class="docmeta">
+  <dt>Document type</dt><dd>Complete technical and design documentation</dd>
+  <dt>Scope</dt><dd>Backend, agent pipeline, frontend, sandbox worker, deployment, security</dd>
+  <dt>Audience</dt><dd>Engineers reviewing, operating or extending AutoDev</dd>
+  <dt>Status</dt><dd>Describes the implemented system in this working tree, not a proposal</dd>
+  <dt>Source of truth</dt><dd>The code in <code>backend/app</code>, <code>frontend/src</code> and <code>worker/app.py</code></dd>
+</div>
+
+<p class="small">
+  Every capability described here exists in the repository. Where something is deliberately not
+  implemented, it is listed in section 18 rather than implied. Figures such as test counts and diff
+  sizes were produced by running the project, and are recorded in section 20.3.
+</p>
+
+<!-- ============================== 01 ============================== -->
+<h2 class="startpage">01 · Executive summary</h2>
+<p class="lead">
+  AutoDev is a self-hosted control plane for an autonomous software-engineering agent. It takes a
+  GitHub issue or a free-form development request, clones the repository into an isolated workspace,
+  analyses the code, produces an implementation plan, asks a human to approve it, edits the code,
+  runs the project's real test suite, repairs failures within a bounded budget, validates the
+  resulting diff against a set of hard safety rules, commits to a feature branch, and prepares a
+  pull request that a human must explicitly confirm.
+</p>
+
+<h3>What makes it different from a chat wrapper</h3>
+<p>
+  The central design decision is not the model. It is the <strong>separation of judgement from
+  action</strong>. A language model is used only to produce structured proposals — an analysis, a
+  plan, a set of file edits, a failure diagnosis, a pull-request summary. Every side effect is
+  performed by deterministic Python: path confinement, branch naming, diff measurement, secret
+  scanning, test execution inside a sandbox, and git operations. The model never holds a shell, never
+  writes a file directly, and never reports a test result. Test results come from a subprocess that
+  actually ran.
+</p>
+
+<div class="grid2">
+  <div class="card">
+    <h4>Evidence, not narration</h4>
+    <p>
+      A run is "completed" only when the sandbox returned exit code 0 and the staged diff passed
+      validation. The dashboard shows the real diff, the real pytest output and the real validation
+      report. Prose generated by a model cannot influence that verdict.
+    </p>
+  </div>
+  <div class="card">
+    <h4>Two independent human gates</h4>
+    <p>
+      Plan approval happens before a single file is modified. Pull-request creation requires a
+      separate explicit confirmation. Either gate can be disabled by configuration, but the default
+      posture is supervised autonomy: the agent does the labour, the human keeps the authority.
+    </p>
+  </div>
+  <div class="card">
+    <h4>Honest demo mode</h4>
+    <p>
+      With no API key, AutoDev runs a deterministic fixture provider for the bundled calculator
+      repository. It is labelled in the API, the UI and the logs. Cloning, editing, pytest, failure
+      correction, committing and diffing are still real; only the "thinking" is canned.
+    </p>
+  </div>
+  <div class="card">
+    <h4>Fail-closed by construction</h4>
+    <p>
+      An unconfigured sandbox worker refuses every command. A missing test command produces a
+      warning, not a pass. An unexpected modified file, a protected path, a detected secret or an
+      oversized diff blocks commit and pull-request creation.
+    </p>
+  </div>
+</div>
+
+<h3>Scale of the implementation</h3>
+<table>
+  <thead><tr><th>Layer</th><th>Implemented surface</th><th>Verification</th></tr></thead>
+  <tbody>
+    <tr><td>Backend</td><td>FastAPI application, 7 route modules, 8 SQLAlchemy models, 14 agent modules, GitHub integration, demo seeding</td><td>36 pytest tests pass; Ruff clean</td></tr>
+    <tr><td>Agent</td><td>Provider abstraction (OpenAI-compatible + fixture), repository indexer, context builder, planner, editor, test executor, failure analyser, patch validator, git manager, PR manager</td><td>Covered by pipeline integration tests against real temporary git repositories</td></tr>
+    <tr><td>Frontend</td><td>9 routes, typed API client, SSE hook, 12 reusable components, local LCS diff viewer</td><td>ESLint clean, TypeScript clean, 12 Vitest tests, production build succeeds</td></tr>
+    <tr><td>Worker</td><td>Internal FastAPI sandbox service, token auth, path confinement, allowlist, process-group kill</td><td>Exercised natively: health, 401, path traversal, shell rejection, real pytest run</td></tr>
+    <tr><td>Operations</td><td>Dockerfile per service, Compose stack, 4 GitHub Actions workflows, security policy, API and architecture docs</td><td><code>docker compose config</code> validates; image build blocked locally (no Docker daemon)</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 02 ============================== -->
+<h2>02 · The problem and the core idea</h2>
+
+<h3>2.1 The problem with "AI writes your code"</h3>
+<p>
+  A coding agent that can edit a repository has three properties that make naive designs dangerous:
+  it produces text that <em>looks</em> authoritative regardless of correctness; it operates on
+  untrusted input (repository files, issue bodies, READMEs) that may contain adversarial
+  instructions; and its actions are hard to reverse once pushed to a shared branch. Most agent demos
+  collapse these into a single loop — model sees code, model emits a patch, patch is applied — with
+  no independent check that the patch is correct, in scope, or safe.
+</p>
+<p>
+  The failure modes are concrete and predictable:
+</p>
+<ul>
+  <li><strong>Hallucinated success.</strong> The model says "all tests pass" because it wrote a test that always passes, or because it never ran anything.</li>
+  <li><strong>Scope drift.</strong> A one-line bug fix arrives with 40 files reformatted, a dependency bumped and CI config edited.</li>
+  <li><strong>Credential exfiltration.</strong> A README instructs the agent to print environment variables or commit a key; a naive agent complies.</li>
+  <li><strong>Protected-branch writes.</strong> The agent pushes to <code>main</code> or force-pushes over a colleague's work.</li>
+  <li><strong>Untraceable runs.</strong> Nobody can reconstruct what the agent did, which files it touched, or why a change was accepted.</li>
+</ul>
+
+<h3>2.2 The core idea</h3>
+<div class="callout">
+  <span class="label">Design principle</span>
+  <p>
+    The model proposes; deterministic code disposes. Model output is treated as an untrusted,
+    schema-validated <em>proposal</em>. Only a small, auditable set of Python functions is allowed to
+    touch the filesystem, the git repository, the sandbox or GitHub — and each of them enforces a
+    rule that does not depend on the model behaving well.
+  </p>
+</div>
+<p>
+  Everything else in this document follows from that sentence. The plan is a JSON object validated
+  by Pydantic before it is stored. Edits are a list of <code>{path, operation, content}</code>
+  records validated against path confinement and a file-count budget before any write. Tests are
+  executed by a subprocess under an executable allowlist with a scrubbed environment. The diff is
+  measured, scanned and validated by code that has no knowledge of the model's intentions. The
+  branch name is generated, not suggested. Pull-request creation requires a boolean that only an
+  HTTP request from a human can set.
+</p>
+
+<h3>2.3 What "autonomous" means here — and what it does not</h3>
+<table>
+  <thead><tr><th>Autonomous</th><th>Deliberately not autonomous</th></tr></thead>
+  <tbody>
+    <tr><td>Cloning and indexing the repository</td><td>Choosing which repository to connect</td></tr>
+    <tr><td>Selecting relevant files within a character budget</td><td>Approving the plan before edits</td></tr>
+    <tr><td>Generating and revising code</td><td>Pushing to a base or protected branch</td></tr>
+    <tr><td>Running tests and parsing results</td><td>Merging a pull request</td></tr>
+    <tr><td>Diagnosing failures and retrying (bounded)</td><td>Exceeding the correction budget</td></tr>
+    <tr><td>Committing to an <code>autodev/*</code> branch</td><td>Creating the pull request without confirmation</td></tr>
+  </tbody>
+</table>
+
+<h3>2.4 Success criteria used during development</h3>
+<ol>
+  <li>A reviewer can explain any completed run from the stored record alone: plan, files inspected, every edit, every test attempt, the validation report, the diff and the commit.</li>
+  <li>No credential configured on the server is ever serialised into an API response, a log line, a diff or a browser bundle.</li>
+  <li>A failed test suite cannot produce a "completed" execution, no matter what the model claims.</li>
+  <li>The system is genuinely usable with zero external credentials, and honest about which parts are simulated when it is.</li>
+  <li>Every dangerous operation has a test that demonstrates the refusal, not just the happy path.</li>
+</ol>
+
+<!-- ============================== 03 ============================== -->
+<h2>03 · System architecture at a glance</h2>
+<p class="lead">
+  Three runtimes, one shared workspace contract. The browser never talks to GitHub, to the AI
+  provider or to the sandbox; the backend is the only component holding credentials and the only
+  component that can cause a side effect.
+</p>
+
+<div class="ascii">┌──────────────────────────┐        REST + SSE        ┌───────────────────────────────┐
+│  React control plane     │ ───────────────────────► │  FastAPI backend              │
+│  Vite · TS · Tailwind    │ ◄─────────────────────── │  orchestrator · routes        │
+└──────────────────────────┘   logs, state, results    │  SQLAlchemy · Pydantic        │
+                                                       └───────┬───────────┬───────────┘
+                                      ┌────────────────────────┘           └──────────────┐
+                                      ▼                                               ▼
+                          ┌───────────────────────┐                     ┌─────────────────────────┐
+                          │  SQLite               │                     │  Workspace volume       │
+                          │  executions, logs,    │                     │  execution-N/ (git clone)│
+                          │  diffs, tests, PRs    │                     └────────────┬────────────┘
+                          └───────────────────────┘                                  │
+                                      ▲                                              │
+                     GitHub API ◄─────┼──────────────┐                               │
+                     (PyGithub)       │              │                               │
+                                      │        ┌─────▼──────────────┐                │
+                                      │        │  AI provider       │                │
+                                      │        │  OpenAI-compatible │                │
+                                      │        │  or demo fixtures  │                │
+                                      │        └────────────────────┘                │
+                                      │                                              │
+                              ┌───────▼─────────────┐        allowlisted argv        │
+                              │ Sandbox             │ ◄──────────────────────────────┘
+                              │ local: host thread  │
+                              │ docker: worker HTTP │ ──► isolated worker container
+                              └─────────────────────┘     (internal network, non-root)</div>
+
+<h3>3.1 Component responsibilities</h3>
+<table>
+  <thead><tr><th>Component</th><th>Owns</th><th>Never does</th></tr></thead>
+  <tbody>
+    <tr><td>React frontend</td><td>Presentation, navigation, SSE subscription, diff rendering, local UI state, optional client-side API token</td><td>Hold provider keys, call GitHub, compute a "passed" verdict, run commands</td></tr>
+    <tr><td>FastAPI backend</td><td>All orchestration, persistence, validation, credential use, SSE fan-out</td><td>Serve untrusted HTML, execute model-supplied shell strings</td></tr>
+    <tr><td>Agent modules</td><td>Analysis, planning, editing, testing, correction, validation, git and PR operations</td><td>Bypass validation because a plan said so</td></tr>
+    <tr><td>SQLite</td><td>Append-only audit trail of tasks, executions, logs, tests, diffs, PRs and settings</td><td>Store tokens or full provider responses containing secrets</td></tr>
+    <tr><td>Sandbox (local or worker)</td><td>Executing allowlisted argv with limits and a scrubbed environment</td><td>Interpret shell syntax, read outside the workspace, see credentials</td></tr>
+    <tr><td>GitHub</td><td>Repository metadata, issues, branch push, pull-request creation</td><td>Receive a force-push, a base-branch push or an auto-merge</td></tr>
+  </tbody>
+</table>
+
+<h3>3.2 Why a monorepo with a shared workspace contract</h3>
+<p>
+  The three runtimes are coupled by exactly one mutable artefact: a git clone under
+  <code>WORKSPACE_DIR/execution-&lt;id&gt;</code>. The backend creates it, the sandbox reads and
+  executes inside it, the worker mounts it read-write over a volume, and the git manager commits in
+  it. Nothing else is shared — no database connection, no message broker, no in-memory state. That
+  keeps the sandbox replaceable (local thread today, container today, stronger runtime later)
+  without changing the agent, and it keeps the frontend replaceable without changing the pipeline.
+</p>
+
+<h3>3.3 Request path in development versus production</h3>
+<table>
+  <thead><tr><th>Concern</th><th>Local development</th><th>Compose deployment</th></tr></thead>
+  <tbody>
+    <tr><td>Browser origin</td><td><code>http://127.0.0.1:5173</code> (Vite)</td><td><code>http://localhost:8080</code> (nginx)</td></tr>
+    <tr><td>API routing</td><td>Vite proxy <code>/api</code> → <code>127.0.0.1:8000</code></td><td>nginx <code>proxy_pass</code> to <code>backend:8000</code></td></tr>
+    <tr><td>Static assets</td><td>Vite dev server</td><td>nginx serves <code>/usr/share/nginx/html</code></td></tr>
+    <tr><td>SSE</td><td>Proxy with buffering disabled</td><td>nginx <code>proxy_buffering off</code>, long read timeout</td></tr>
+    <tr><td>Single-origin option</td><td>FastAPI serves <code>frontend/dist</code> if present</td><td>Not used; nginx is the edge</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================== 04 ============================== -->
+<h2>04 · Methodology: the eleven-stage execution pipeline</h2>
+<p class="lead">
+  An execution is a persisted state machine, not a single function call. Each stage writes its
+  state, its logs and its artefacts before the next stage begins, so a crash or cancellation leaves
+  a coherent, inspectable record.
+</p>
+
+<h3>4.1 Stage map</h3>
+<table>
+  <thead><tr><th style="width:6mm">#</th><th>Stage</th><th>What actually happens</th><th>Artefact written</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><code>initializing</code></td><td>Load task, repository and runtime settings; construct the provider; record provider name and model.</td><td>Execution row, provider metadata</td></tr>
+    <tr><td>2</td><td>Workspace preparation</td><td>Delete any stale directory, shallow-clone (<code>--depth 50</code>) into <code>execution-N</code>, configure agent git identity, resolve the base branch.</td><td><code>workspace_path</code>, <code>base_branch</code></td></tr>
+    <tr><td>3</td><td><code>analyzing_repository</code></td><td>Walk the clone: languages, modules, entry points, tests, configs, dependencies, detected commands. Excludes VCS, dependency and build directories and secret-looking files.</td><td>Repository analysis JSON</td></tr>
+    <tr><td>4</td><td><code>analyzing_task</code></td><td>Tokenise the task, rank files, build a character-budgeted context, ask the provider for a structured understanding of the problem.</td><td>Files-inspected ranking, task analysis</td></tr>
+    <tr><td>5</td><td><code>planning</code></td><td>Generate a plan (summary, 4–8 steps, affected files, test plan, risks); validate the JSON against the plan schema.</td><td><code>plan_json</code></td></tr>
+    <tr><td>6</td><td><code>awaiting_plan_approval</code></td><td>Pause. No file has been touched. Wait for human approval, cancellation or timeout (max 900 s, bounded by the execution timeout).</td><td>Status transition, SSE state event</td></tr>
+    <tr><td>7</td><td><code>creating_branch</code></td><td>Generate <code>autodev/&lt;slug&gt;-&lt;id&gt;</code> from the task title and create it from the base branch.</td><td><code>branch_name</code></td></tr>
+    <tr><td>8</td><td><code>modifying_files</code></td><td>Re-select context for the plan's affected files, generate a change set, validate every path, apply atomically, stage in git, persist per-file diffs.</td><td><code>file_changes</code> rows</td></tr>
+    <tr><td>9</td><td><code>running_tests</code></td><td>Detect test and check commands, execute them through the sandbox, parse pass/fail counts and failing test names.</td><td><code>test_executions</code> rows</td></tr>
+    <tr><td>10</td><td><code>analyzing_failures</code></td><td>If tests fail and budget remains: extract failures, request a focused correction, re-validate paths, re-run tests. Bounded by <code>AGENT_MAX_CORRECTION_ATTEMPTS</code>.</td><td>Attempt counter, additional changes and tests</td></tr>
+    <tr><td>11</td><td><code>validating_changes</code> → commit</td><td>Run repository checks, build the validation report, scan the diff, enforce scope and size, then commit on the feature branch.</td><td><code>validation_json</code>, <code>diff_json</code>, commit SHA</td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 Why the plan is generated before the branch</h3>
+<p>
+  The approval gate is only meaningful if declining it costs nothing. If the branch were created and
+  files edited first, a reviewer would be approving a fait accompli. Generating the plan against a
+  pristine clone means "reject" leaves the repository exactly as it was, and the workspace can be
+  discarded without cleanup logic.
+</p>
+
+<h3>4.3 Why the task is analysed twice</h3>
+<p>
+  The first analysis answers "what does this task require and how does the code work today?"; it is
+  deliberately unconstrained by a proposed solution. The plan then answers "what exactly will we
+  change?". Finally, the edit context is rebuilt around the plan's
+  <code>files_likely_affected</code>, which is usually a different and tighter set than the initial
+  ranking. The union of both rankings is stored as the files inspected, so the audit record shows
+  everything the model could have seen.
+</p>
+
+<h3>4.4 The correction loop, precisely</h3>
+<pre><code>attempt = 0
+while not suite.passed and attempt &lt; max_correction_attempts:
+    attempt += 1
+    analysis = provider.analyze_failure(failing_tests, output, plan, context)
+    if not analysis.changes:
+        break                      # the model declined; do not spin
+    editor.apply(analysis.changes) # full path validation, same budget
+    git.stage_paths(...)
+    suite = executor.run_commands(test_commands)
+if not suite.passed:
+    raise ExecutionFailed(...)     # never "completed" with red tests</code></pre>
+<p>
+  Three properties matter. The loop is <strong>bounded</strong> (default 2 attempts, configurable
+  0–5), so a systematically wrong approach cannot burn an unbounded token budget.
+  <strong>Every attempt is persisted</strong>, including the failing output, so a reviewer sees the
+  agent struggle rather than a suspiciously clean result. And a correction is subject to the
+  <strong>same validation</strong> as the original edit — a model cannot "fix" its way around path
+  confinement.
+</p>
+
+<h3>4.5 Cancellation and timeouts</h3>
+<p>
+  A cancellation token is checked between stages and passed into the sandbox as a cancel callback,
+  which terminates the running process tree. The whole pipeline is wrapped in
+  <code>asyncio.wait_for</code> with the configured execution timeout plus a 30-second grace period,
+  so a hung provider or a wedged subprocess cannot leave an execution "running" forever. If the
+  backend restarts, startup marks every queued, running or awaiting-approval execution as failed and
+  keeps its logs and diff.
+</p>
+
+<!-- ============================== 05 ============================== -->
+<h2>05 · Technology decisions and why each one was made</h2>
+<p class="lead">
+  No choice below is a default that arrived by accident. Each entry states the alternative that was
+  realistically on the table, the property that decided it, and the cost that was accepted. These
+  are engineering judgements, not benchmark results.
+</p>
+
+<h3>5.1 Backend and data</h3>
+<table>
+  <thead><tr><th style="width:27mm">Choice</th><th style="width:40mm">Alternatives considered</th><th>Why this one</th><th style="width:40mm">Cost accepted</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>FastAPI</strong></td>
+      <td>Flask, Django REST, Express/NestJS</td>
+      <td>The workload is I/O-bound and long-lived: cloning, HTTP calls to a model, subprocess tests, SSE. Native <code>async</code> plus <code>StreamingResponse</code> covers the whole surface without a second server. Pydantic-first request models make the API contract the same object used for validation, and OpenAPI documentation is generated rather than written.</td>
+      <td>Single-process Python is not the right shape for horizontal scale; the in-process worker and SQLite follow from this.</td>
+    </tr>
+    <tr>
+      <td><strong>Pydantic v2</strong></td>
+      <td>dataclasses, attrs, manual <code>jsonschema</code></td>
+      <td>Model output is untrusted input. Pydantic turns "the model returned JSON" into "the model returned a plan with 4–8 indexed steps and a list of paths", at runtime, with precise errors. The same library validates settings and API payloads, so there is one validation idiom.</td>
+      <td>Strict schemas occasionally reject a usable-but-sloppy model response; the parser accepts fenced or embedded JSON first to reduce that friction.</td>
+    </tr>
+    <tr>
+      <td><strong>SQLAlchemy 2 + SQLite</strong></td>
+      <td>PostgreSQL, MongoDB, flat JSON files</td>
+      <td>The audit trail is inherently relational (execution → logs, changes, tests, PR) and must be queryable with filters and aggregates for the dashboard. SQLite gives that with zero infrastructure, a single file to back up, and trivial CI. SQLAlchemy keeps a PostgreSQL migration a connection-string change rather than a rewrite.</td>
+      <td>One writer; no horizontal scaling; <code>check_same_thread</code> handling and WAL files on disk. Documented as a limitation, not hidden.</td>
+    </tr>
+    <tr>
+      <td><strong>PyGithub</strong></td>
+      <td>raw <code>httpx</code> against the REST API, GitHub CLI</td>
+      <td>Two auth modes are required — personal access token and GitHub App installation — and PyGithub supports both without hand-rolling JWT signing and token exchange. It also normalises pagination and error shapes.</td>
+      <td>A dependency whose API is broader than needed; wrapped behind <code>GitHubService</code> so it can be replaced.</td>
+    </tr>
+    <tr>
+      <td><strong>HTTPX</strong></td>
+      <td><code>requests</code>, provider SDKs</td>
+      <td>Async requests that fit the FastAPI event loop, with explicit timeouts. Using the raw OpenAI-compatible HTTP contract instead of a vendor SDK keeps the provider boundary honest: any compatible endpoint works, and the "no key" path is a first-class implementation rather than a mocked client.</td>
+      <td>No vendor-specific helpers; streaming model output is not implemented (not needed — structured JSON is requested once).</td>
+    </tr>
+    <tr>
+      <td><strong>SSE</strong></td>
+      <td>WebSockets, polling only</td>
+      <td>Execution logs flow in one direction. <code>EventSource</code> reconnects automatically, traverses proxies and nginx with one directive, and needs no protocol upgrade, heartbeat or connection registry. Because logs are persisted, a dropped stream loses nothing — the client reloads <code>/logs</code>.</td>
+      <td>No client→server channel over the stream (approval and cancel are ordinary POSTs), and the token must travel as a query parameter because <code>EventSource</code> cannot set headers.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.2 Frontend</h3>
+<table>
+  <thead><tr><th style="width:27mm">Choice</th><th style="width:40mm">Alternatives considered</th><th>Why this one</th><th style="width:40mm">Cost accepted</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>React 18 + TypeScript</strong></td>
+      <td>Vue, Svelte, server-rendered templates</td>
+      <td>The UI is a dense, stateful console: a live terminal, a tabbed diff viewer, plan approval, filters and pagination. Typed props and typed API responses catch contract drift at compile time — important because the backend schema is the real interface. React's ecosystem supplies the chart and icon primitives without a design-system dependency.</td>
+      <td>More ceremony than Svelte; a 740 kB production bundle (warning, not a failure) that a route-level split would reduce.</td>
+    </tr>
+    <tr>
+      <td><strong>Vite</strong></td>
+      <td>Create React App, Next.js, Webpack</td>
+      <td>This is an authenticated internal console, not a public content site: SSR and SEO have no value, while fast HMR and a dev proxy that forwards <code>/api</code> (including SSE) do. Vite builds to static files that either nginx or FastAPI can serve, keeping deployment options open.</td>
+      <td>No server rendering; the app is a client-rendered SPA behind auth.</td>
+    </tr>
+    <tr>
+      <td><strong>Tailwind CSS</strong></td>
+      <td>component library (MUI/Chakra), CSS Modules, plain CSS</td>
+      <td>A control plane needs a consistent, dense visual language across 9 pages. Putting palette, type scale, radii and shadows in one config makes a whole-app restyle a config change rather than a hunt through components. It also avoids the recognisable "default component library" look, which was an explicit product requirement.</td>
+      <td>Verbose class lists in JSX; a PostCSS build step; utilities must be reviewed for invalid custom-opacity combinations.</td>
+    </tr>
+    <tr>
+      <td><strong>React Router 6</strong></td>
+      <td>TanStack Router, hand-rolled routing</td>
+      <td>Simple nested layout with a persistent sidebar and topbar, plus a catch-all 404. File-based routing would add a build plugin for no gain at this size.</td>
+      <td>Future-flag warnings in tests; no typed route params.</td>
+    </tr>
+    <tr>
+      <td><strong>Recharts</strong></td>
+      <td>Chart.js, D3, hand-drawn SVG</td>
+      <td>Declarative React components for a 14-day activity chart, with control over stroke, dots and tooltip styling so the chart matches the rest of the theme. D3 would be more powerful and far more code for one chart.</td>
+      <td>Bundle weight; limited to the chart types the dashboard needs.</td>
+    </tr>
+    <tr>
+      <td><strong>Custom LCS diff</strong></td>
+      <td>Monaco, <code>react-diff-viewer</code>, server-rendered diff HTML</td>
+      <td>Diffs are the primary evidence surface. Owning the algorithm means split and unified modes, per-line numbering and contained horizontal scrolling, with no CDN, no worker bundle and no licence question. The diff itself is produced by git, not by the frontend; the viewer only aligns lines.</td>
+      <td>~200 lines of algorithm to maintain; no syntax highlighting.</td>
+    </tr>
+    <tr>
+      <td><strong>Lucide</strong></td>
+      <td>Font Awesome, Heroicons, emoji</td>
+      <td>Consistent stroke weight, tree-shakeable React components, and it matches the flat technical aesthetic without decorative fills.</td>
+      <td>Another dependency; icons are chosen per page rather than from one sprite.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>5.3 Tooling, packaging and operations</h3>
+<table>
+  <thead><tr><th style="width:27mm">Choice</th><th style="width:40mm">Alternatives considered</th><th>Why this one</th><th style="width:40mm">Cost accepted</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>pytest</strong></td>
+      <td><code>unittest</code></td>
+      <td>Fixtures are the natural way to build a throwaway git repository with a real bug and a real test suite per test, and <code>tmp_path</code> gives isolation for free. Parametrisation covers the allowlist and path-traversal matrices compactly.</td>
+      <td>An extra dev dependency; async tests need <code>asyncio_mode = auto</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Ruff</strong></td>
+      <td>flake8 + isort + pylint + black</td>
+      <td>One fast tool applies import ordering, bugbear rules, pyupgrade and the <code>S</code> (bandit-derived) security rules — relevant for a codebase whose job is running subprocesses. <code>S603</code>/<code>S607</code> are explicitly justified in config rather than globally disabled.</td>
+      <td>Opinionated formatting; per-file ignores for tests and the GitHub token default.</td>
+    </tr>
+    <tr>
+      <td><strong>Vitest + Testing Library</strong></td>
+      <td>Jest, Playwright component tests</td>
+      <td>Reuses the Vite transform pipeline, so there is no second module resolution config. Testing Library keeps assertions on what a user sees (roles, text) rather than component internals.</td>
+      <td>jsdom is not a browser; layout and SSE timing are not covered by these tests.</td>
+    </tr>
+    <tr>
+      <td><strong>Docker Compose</strong></td>
+      <td>single container, Kubernetes, bare metal</td>
+      <td>The security model depends on a real boundary between the backend and the code it executes. Compose expresses that with three services, an <code>internal: true</code> network, a read-only root filesystem, dropped capabilities and resource limits — in a file a reviewer can read in a minute.</td>
+      <td>Not an orchestrator; no autoscaling, and image builds require a running daemon.</td>
+    </tr>
+    <tr>
+      <td><strong>nginx</strong></td>
+      <td>Caddy, Traefik, FastAPI static serving</td>
+      <td>Serves the SPA and proxies <code>/api</code> with SSE buffering disabled. Battle-tested defaults, a tiny config, and a <code>/healthz</code> endpoint for the Compose healthcheck.</td>
+      <td>A third image; TLS termination is left to the operator.</td>
+    </tr>
+    <tr>
+      <td><strong>GitHub Actions</strong></td>
+      <td>GitLab CI, Jenkins, none</td>
+      <td>Four small workflows — backend lint/test, frontend lint/typecheck/test/build, Compose container build, CodeQL — that mirror the local commands exactly, so "works on my machine" is the same command as CI.</td>
+      <td>No caching tuning; container workflow is slower than the test workflows.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <span class="label">Rejected on purpose</span>
+  <p>
+    A task queue and Redis were rejected because the worker is in-process and the target is a single
+    supervised backend; adding a broker would create a second source of truth for execution state.
+    LangChain-style agent frameworks were rejected because the value here is the deterministic
+    boundary and the audit trail, not a chain abstraction: the pipeline is explicit Python, readable
+    top to bottom, with no hidden prompt assembly. Auto-merge was rejected outright as a product
+    decision — the human gate is the feature.
+  </p>
+</div>
+
+<!-- ============================== 06 ============================== -->
+<h2>06 · Backend architecture in depth</h2>
+
+<h3>6.1 Package layout and responsibility</h3>
+<table>
+  <thead><tr><th style="width:52mm">Package</th><th>Responsibility</th></tr></thead>
+  <tbody>
+    <tr><td><code>app/api/routes</code></td><td>Health and system status, dashboard aggregates, repositories and issues, tasks, executions (including SSE, diff, patch, PR draft and PR creation), pull requests, settings.</td></tr>
+    <tr><td><code>app/api/deps.py</code></td><td>Shared dependencies: database session, pagination, the API-token guard.</td></tr>
+    <tr><td><code>app/agent/orchestrator.py</code></td><td>The state machine: workspace preparation, stage transitions, approval waits, cancellation, correction loop, persistence, commit, PR creation.</td></tr>
+    <tr><td><code>app/agent/repository_analyzer.py</code></td><td>Real clone indexing: language census, modules, entry points, tests, configs, dependency manifests and command detection, with an exclusion policy.</td></tr>
+    <tr><td><code>app/agent/context_builder.py</code></td><td>Task-aware file ranking and a strict character budget; records what was included and what was omitted.</td></tr>
+    <tr><td><code>app/agent/planning_engine.py</code></td><td>Wraps the provider to produce a schema-validated <code>ImplementationPlan</code>.</td></tr>
+    <tr><td><code>app/agent/code_generator.py</code>, <code>code_editor.py</code></td><td>Structured change-set generation, then atomic application behind path confinement, size limits and a file-count budget.</td></tr>
+    <tr><td><code>app/agent/test_executor.py</code></td><td>Command policy, local and Docker execution, output capping, pytest/Vitest output parsing, timeouts, process-tree termination.</td></tr>
+    <tr><td><code>app/agent/failure_analyzer.py</code></td><td>Failure-focused prompt construction and structured correction parsing.</td></tr>
+    <tr><td><code>app/agent/patch_validator.py</code></td><td>Branch, scope, protected-path, binary, size, secret and test-result validation; produces the report the UI renders.</td></tr>
+    <tr><td><code>app/agent/git_manager.py</code></td><td>Clone, branch, stage, commit, diff, numstat, push. Refuses non-<code>autodev/</code> branches; never force-pushes.</td></tr>
+    <tr><td><code>app/agent/pull_request_manager.py</code></td><td>Builds the PR title and body from the validated diff, tests and validation report.</td></tr>
+    <tr><td><code>app/agent/ai</code></td><td>Provider ABC, prompt construction with untrusted-data delimiters, JSON extraction and schema parsing, OpenAI-compatible client, deterministic fixture provider.</td></tr>
+    <tr><td><code>app/core</code></td><td>Settings, error envelope and handlers, path/file utilities, logging configuration, secret redaction and scanning, optional bearer auth.</td></tr>
+    <tr><td><code>app/database</code></td><td>Declarative base, engine and session scope, schema creation, UTC timestamp helper.</td></tr>
+    <tr><td><code>app/integrations/github</code></td><td>PAT and GitHub App authentication, repository metadata, issues, PR creation; normalises failures into a typed error.</td></tr>
+    <tr><td><code>app/models</code>, <code>app/schemas</code></td><td>SQLAlchemy persistence and Pydantic request/response contracts.</td></tr>
+    <tr><td><code>app/services</code></td><td>Demo seeding and fixtures, runtime settings validation, execution serialisation and actions, repository connection.</td></tr>
+  </tbody>
+</table>
+
+<h3>6.2 Application factory and lifespan</h3>
+<p>
+  <code>create_app()</code> builds a FastAPI instance with a lifespan that creates the schema, seeds
+  the demo repository and tasks, and marks interrupted executions as failed on both startup and
+  shutdown. Middleware adds an origin allowlist and three security headers
+  (<code>X-Content-Type-Options</code>, <code>X-Frame-Options</code>, <code>Referrer-Policy</code>).
+  Every router except health is mounted behind the optional bearer-token dependency, and if a built
+  frontend exists, the SPA is served with a fallback that excludes <code>api/</code>,
+  <code>docs</code>, <code>redoc</code> and <code>openapi.json</code>.
+</p>
+
+<h3>6.3 Error model</h3>
+<p>
+  All application errors derive from <code>AppError</code> and serialise to one envelope —
+  <code>{"error": {"code", "message", "details"}}</code> — with a stable status mapping:
+  422 for validation, 400 for unsafe operations, 404 for missing records, 409 for conflicts,
+  503 for missing configuration and 502 for GitHub failures. Unhandled exceptions are caught,
+  redacted and returned as a generic 500 so a stack trace cannot leak a credential. The frontend has
+  exactly one place to read errors, which is why every page can show a meaningful message.
+</p>
+
+<h3>6.4 Concurrency model</h3>
+<p>
+  The orchestrator keeps a dictionary of <code>asyncio.Task</code> objects keyed by execution id and
+  admits work only while <code>active_count() &lt; AGENT_MAX_CONCURRENT_TASKS</code> (default 2).
+  Each execution owns a cancel event and an approval event. Blocking work — git operations, the
+  sandbox HTTP call in Docker mode — is pushed to a thread with <code>asyncio.to_thread</code> so the
+  event loop keeps serving SSE and API requests. There is no shared mutable pipeline state between
+  executions; all durable state lives in the database, which is what makes a restart recoverable.
+</p>
+
+<h3>6.5 Persistence discipline</h3>
+<p>
+  Every stage update goes through a short <code>session_scope()</code> transaction and is committed
+  before the corresponding SSE event is published. This ordering is deliberate: a browser that
+  reconnects and re-fetches the execution must never see a state older than the one it was told
+  about. Logs are inserted with monotonically increasing ids that double as replay cursors.
+</p>
+
+<!-- ============================== 07 ============================== -->
+<h2>07 · The agent: provider abstraction, context, editing, correction</h2>
+
+<h3>7.1 The provider boundary</h3>
+<pre><code>class AIProvider(ABC):
+    name: str; model: str; is_fixture: bool
+
+    async def _complete(messages, *, json_mode=True) -&gt; AIResult
+
+    async def analyze_task(...)        # structured understanding
+    async def generate_plan(...)       # ImplementationPlan
+    async def generate_changes(...)    # ChangeSet of file operations
+    async def analyze_failure(...)     # FailureAnalysis
+    async def summarize_changes(...)   # PR title and body</code></pre>
+<p>
+  Five capabilities, one transport method. Concrete providers differ only in
+  <code>_complete</code>: the OpenAI-compatible client sends a chat-completion request with a
+  temperature of 0.1 and JSON mode; the demo provider returns a fixture selected by task signature.
+  Everything downstream — validation, editing, testing, validation report — is identical, which is
+  why demo mode can exercise the real pipeline instead of a parallel fake one.
+</p>
+<p>
+  <code>AIResult</code> carries the raw content, provider name, model, token usage and a
+  <code>fixture</code> flag. Token usage is accumulated onto the execution row, so cost is visible
+  per run. The flag is what lets logs and summaries state, truthfully, that no model was called.
+</p>
+
+<h3>7.2 Repository analysis: what is indexed and why</h3>
+<p>
+  The analyser is static and offline; it never executes repository code. It builds a
+  <code>RepositoryIndex</code> containing:
+</p>
+<ul>
+  <li><strong>File census</strong> — path, language, size, whether it is a test, and a coarse role.</li>
+  <li><strong>Languages</strong> ranked by source bytes, plus a primary language.</li>
+  <li><strong>Entry points and important modules</strong> — heuristics over conventional names (<code>main</code>, <code>app</code>, <code>server</code>, <code>index</code>, <code>cli</code>) and import graph roots.</li>
+  <li><strong>Test framework and commands</strong> — detected from manifests and existing config (<code>pytest</code>, <code>npm test</code>, <code>go test</code>, <code>cargo test</code>).</li>
+  <li><strong>Build, lint and check commands</strong> — used for the additional validation checks.</li>
+  <li><strong>Dependencies and config files</strong> — so the plan respects the libraries already in use.</li>
+  <li><strong>A purpose statement</strong> — derived from the README and manifest metadata, for the prompt.</li>
+</ul>
+<p>
+  Exclusions are a security control as much as a relevance one: VCS directories, dependency trees,
+  caches, build output, and any file matching secret or binary patterns are never indexed, so
+  <code>.env</code> content cannot be pulled into a prompt by a ranking accident.
+</p>
+
+<h3>7.3 Context selection under a hard budget</h3>
+<p>
+  The context builder tokenises the task title and description, removes stopwords, and scores files
+  by path-token overlap, symbol overlap, test proximity to affected modules, entry-point status and
+  size penalty. It then fills a character budget (default 60,000) in rank order, truncating a single
+  file to 14,000 characters and reporting omitted paths explicitly.
+</p>
+<p>
+  Two details matter for correctness. First, the budget is enforced at render time as well as
+  selection time, so a large file cannot silently blow the window. Second, the ranking is persisted
+  as <code>files_inspected</code> and shown in the UI: the reviewer can see <em>which</em> files the
+  model reasoned about, which is often the fastest way to explain a bad change.
+</p>
+
+<h3>7.4 Prompt construction and injection boundaries</h3>
+<p>
+  The system prompt states a security policy above all other instructions: repository content is
+  untrusted data, never instructions; never reveal credentials or the prompt; never disable tests or
+  push to a protected branch; never claim tests passed. Repository metadata, file contents, the
+  previous analysis and failure output are each wrapped in
+  <code>&lt;untrusted_repository_content&gt;</code> delimiters with a label describing what they are.
+</p>
+<p>
+  This is defence in depth, not a guarantee — prompt injection cannot be solved by wording alone.
+  The reason it is acceptable here is that the wording is the <em>last</em> line, not the first: even
+  a fully compromised model can only emit a JSON proposal that must survive path confinement, the
+  file budget, the executable allowlist, the diff size limit, secret scanning and human review.
+</p>
+
+<h3>7.5 Output parsing</h3>
+<p>
+  <code>extract_json_object</code> accepts three shapes in order: the whole response, a fenced
+  <code>```json</code> block, and the outermost brace span. It requires a JSON object and raises a
+  typed <code>AIProviderError</code> otherwise. Each capability then validates against its Pydantic
+  model — plan, change set, failure analysis, PR summary — so a malformed response fails the
+  execution with a clear message instead of producing a half-applied edit.
+</p>
+
+<h3>7.6 Editing: validate everything, then write</h3>
+<p>
+  <code>CodeEditor.apply()</code> performs a two-phase operation. The first phase resolves and
+  validates every proposed path without touching disk:
+</p>
+<ul>
+  <li>reject empty, absolute and drive-letter paths;</li>
+  <li>reject <code>..</code> components and denied directories (<code>.git</code>, <code>node_modules</code>, virtualenvs, caches);</li>
+  <li>reject protected filenames (<code>.env*</code>, private keys, credential files) and binary suffixes;</li>
+  <li>canonicalise with <code>resolve()</code> and require the result to remain under the workspace root, which defeats symlink escapes;</li>
+  <li>reject duplicate paths in one change set;</li>
+  <li>require content for create/update, reject NUL bytes and files over 500 kB;</li>
+  <li>enforce the cumulative touched-file budget (default 10).</li>
+</ul>
+<p>
+  Only when the whole set is valid does the second phase write. Operation semantics are strict too:
+  <code>create</code> will not overwrite an existing file, <code>update</code> requires the file to
+  exist (or to have been created earlier in the same set), and <code>delete</code> removes a file
+  without touching anything else. This makes a partially applied change set impossible — the most
+  common way an agent leaves a repository in an unrecoverable state.
+</p>
+
+<h3>7.7 Test execution policy</h3>
+<table>
+  <thead><tr><th>Rule</th><th>Implementation</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr><td>No shell</td><td>Command parsed with <code>shlex</code> into argv; metacharacters <code>; &amp; | &lt; &gt; ` $()</code> and newlines rejected; <code>shell=False</code> everywhere</td><td>Prevents command chaining and substitution smuggled through a manifest</td></tr>
+    <tr><td>Bare executable allowlist</td><td>Program basename matched against <code>ALLOWED_COMMANDS</code>; paths and shell interpreters rejected</td><td>Stops <code>./deploy.sh</code>, <code>bash</code>, <code>powershell</code>, <code>osascript</code></td></tr>
+    <tr><td>No inline evaluation</td><td><code>python -c</code>, <code>node -e/--eval</code> rejected; Python <code>-m</code> limited to <code>pytest</code>, <code>ruff</code>, <code>unittest</code>, <code>mypy</code></td><td>Inline code defeats an executable allowlist entirely</td></tr>
+    <tr><td>Package managers limited</td><td>Only <code>test</code> and <code>run</code> subcommands</td><td>Blocks install/publish/lifecycle scripts as an execution primitive</td></tr>
+    <tr><td>Scrubbed environment</td><td>Keys matching token/secret/password/credential/api-key/private-key and provider prefixes are dropped; <code>CI=true</code>, <code>NO_COLOR</code>, no bytecode</td><td>A test cannot read the GitHub token even though the backend has it</td></tr>
+    <tr><td>Workspace confinement</td><td>Worker resolves <code>cwd</code> under the shared root and rejects escapes</td><td>Limits blast radius to one execution</td></tr>
+    <tr><td>Bounded output and time</td><td>200k-character cap (head and tail preserved), per-command timeout, process-group kill</td><td>Prevents log flooding and orphaned children</td></tr>
+  </tbody>
+</table>
+
+<h3>7.8 Reading test results honestly</h3>
+<p>
+  The executor does not trust an exit code alone. It parses <code>N passed</code> /
+  <code>N failed</code>, pytest's <code>FAILED</code> lines, and Vitest/Jest failure markers into
+  counts and failing test names, and it persists the raw output alongside them. If no test command
+  is detected, the suite is treated as a warning — the run may complete, but the validation report
+  records "no test command was detected; manual review required", and the UI shows it. This is the
+  difference between "we ran nothing" and "we ran something green".
+</p>
+
+<h3>7.9 Validation: the fail-closed gate</h3>
+<table>
+  <thead><tr><th>Check</th><th>Fails when</th><th>Severity</th></tr></thead>
+  <tbody>
+    <tr><td><code>working-branch</code></td><td>Not on an <code>autodev/</code> branch, or on main/master/develop/base</td><td>error</td></tr>
+    <tr><td><code>changes-present</code></td><td>Nothing staged</td><td>error</td></tr>
+    <tr><td><code>file-limit</code></td><td>More files than <code>AGENT_MAX_FILES_MODIFIED</code></td><td>error</td></tr>
+    <tr><td><code>unrelated-changes</code></td><td>Staged path was not touched by the editor</td><td>error</td></tr>
+    <tr><td><code>protected-paths</code></td><td><code>.env</code>, keys, credentials, certificates</td><td>error</td></tr>
+    <tr><td><code>binary-files</code></td><td>Binary blob in the change set</td><td>error</td></tr>
+    <tr><td><code>diff-size</code></td><td>Diff exceeds 750,000 characters</td><td>error</td></tr>
+    <tr><td><code>secret-scan</code></td><td>Token pattern, private key or credential assignment in added lines</td><td>error</td></tr>
+    <tr><td><code>tests</code></td><td>Suite or repository checks failed</td><td>error</td></tr>
+    <tr><td><code>sensitive-files</code></td><td>CI workflow, Dockerfile, lockfile touched</td><td>warning</td></tr>
+    <tr><td><code>test-deletions</code></td><td>A test file lost all its added lines</td><td>warning</td></tr>
+    <tr><td><code>file-types</code></td><td><code>.exe</code> or <code>.zip</code> in the diff</td><td>warning</td></tr>
+    <tr><td><code>tests-detected</code></td><td>No automated test command found</td><td>warning</td></tr>
+  </tbody>
+</table>
+<p>
+  <code>finalize()</code> passes only when every <em>error</em> check passes and no secrets were
+  found. Warnings are recorded and displayed but do not block a supervised merge. The report is
+  stored verbatim and rendered in the UI, so the reviewer sees the same verdict the pipeline acted
+  on — not a summarised, softened version.
+</p>
+
+<h3>7.10 Git and pull-request discipline</h3>
+<p>
+  Branch names are generated as <code>autodev/&lt;slug&gt;-&lt;execution-id&gt;</code> and validated
+  against <code>^autodev/[a-z0-9][a-z0-9._-]{0,120}$</code>. Clone URLs are authenticated with a
+  one-shot <code>x-access-token</code> URL that is never logged or persisted, and subprocess
+  environments are stripped of anything token-shaped. Before pushing, the PR manager re-verifies
+  that the workspace is on the expected branch, clean, and inside the <code>autodev/</code>
+  namespace. The commit message records the task, execution id, base branch and provider, including
+  the fixture note in demo mode.
+</p>
+<p>
+  The pull-request body is assembled from evidence — changed files with line counts, test commands
+  and results, validation summary and a provider note — with an optional model-written summary that
+  is clearly separate from the evidence. Creating the PR requires a completed, validated execution
+  and <code>confirm: true</code> when <code>REQUIRE_PR_APPROVAL</code> is enabled.
+</p>
+
+<!-- ============================== 08 ============================== -->
+<h2>08 · Human-in-the-loop: state machine and approval gates</h2>
+
+<div class="ascii">            ┌─────────┐   capacity   ┌─────────┐   plan gate   ┌───────────────────┐
+  create ──►│ queued  │─────────────►│ running │──────────────►│ awaiting_approval │
+            └─────────┘              └────┬────┘               └─────────┬─────────┘
+                                          │                              │ approve
+                          tests + validation pass                     ▼
+                                          │                        (running)
+                                          ▼
+                                    ┌───────────┐   PR confirm   ┌────────────────────┐
+                                    │ completed │───────────────►│ pull request open  │
+                                    └───────────┘                └────────────────────┘
+
+  any active state ──► cancelled        running ──► failed (error, timeout, correction cap)
+  failed / cancelled ──► retry creates a NEW execution from the same task (history preserved)</div>
+
+<h3>8.1 Why two gates rather than one</h3>
+<p>
+  Plan approval and pull-request confirmation answer different questions. The first asks "is this the
+  right change to make?"; the second asks "is this the right implementation to publish?". Collapsing
+  them into a single approval would force a reviewer to authorise a push before seeing the diff,
+  tests and validation — which is precisely the decision that needs evidence. Keeping them separate
+  also allows a workflow where plans are auto-approved for trusted tasks while publication stays
+  manual.
+</p>
+
+<h3>8.2 What a reviewer actually sees</h3>
+<ul>
+  <li><strong>Before approval:</strong> plan summary, numbered steps, affected files, test plan and risks, plus the ranked list of files inspected.</li>
+  <li><strong>During execution:</strong> a live terminal of stage-tagged logs over SSE, with a persisted replay for late joiners.</li>
+  <li><strong>After completion:</strong> changed files with add/delete counts, full test output per attempt, the validation checklist with severities, the unified or split diff, a <code>.patch</code> download, and a PR draft.</li>
+</ul>
+
+<h3>8.3 Failure is a first-class outcome</h3>
+<p>
+  A failed execution is not an error page. It stores a human-readable message, redacted technical
+  details, the stage it reached, every log line, every test attempt and any diff produced. Retrying
+  copies the task into a new execution rather than mutating the failed one, so the history stays
+  append-only and a regression in the agent is visible as a trend rather than overwritten.
+</p>
+
+<!-- ============================== 09 ============================== -->
+<h2>09 · Security model and threat analysis</h2>
+<p class="lead">
+  The security posture is "supervised privileged tool", not "public SaaS". The backend and worker are
+  treated as infrastructure: they hold credentials, execute code and can push branches. The controls
+  below are enforced in code and, where practical, covered by tests that assert the refusal.
+</p>
+
+<h3>9.1 Threat model</h3>
+<table>
+  <thead><tr><th style="width:42mm">Threat</th><th>Control</th><th style="width:46mm">Residual risk</th></tr></thead>
+  <tbody>
+    <tr><td>Malicious repository content instructs the agent</td><td>Untrusted-data delimiters, explicit policy, schema-validated output, no tool access for the model, deterministic side effects</td><td>A compromised model can still propose a plausible but wrong in-scope edit; human review is the backstop</td></tr>
+    <tr><td>Credential exfiltration through edits or logs</td><td>Protected-path denial, secret scanning of added lines, environment scrubbing, log redaction, tokens never sent to the browser</td><td>Novel secret formats may evade pattern scanning; review still required</td></tr>
+    <tr><td>Arbitrary command execution via a test command</td><td>argv-only parsing, metacharacter rejection, executable allowlist, inline-eval rejection, package-manager restriction</td><td>An allowlisted test runner executes repository code by design; isolation, not the allowlist, contains it</td></tr>
+    <tr><td>Path traversal or symlink escape</td><td>Normalisation, <code>resolve()</code> containment check, denied directories, symlink write refusal</td><td>Kernel-level races outside the model's reach are out of scope</td></tr>
+    <tr><td>Push to a protected branch or force-push</td><td>Generated <code>autodev/</code> branch, pre-push branch and cleanliness verification, git manager has no force or base-branch operation</td><td>Repository-side branch protection should still be enabled</td></tr>
+    <tr><td>Unreviewed publication</td><td>Plan gate, PR confirmation flag, no merge or approve capability anywhere in the codebase</td><td>An operator can disable both gates deliberately</td></tr>
+    <tr><td>Unauthorised API access</td><td>Optional bearer token compared with <code>hmac.compare_digest</code>, CORS allowlist, TLS expected in front</td><td>No user accounts or RBAC; it is a single-operator tool</td></tr>
+    <tr><td>Resource exhaustion by a test</td><td>Timeouts, process-group kill, output cap, Compose memory/CPU/PID limits, read-only root filesystem</td><td>Local mode has weaker guarantees and is documented as such</td></tr>
+  </tbody>
+</table>
+
+<h3>9.2 The local-mode warning, stated plainly</h3>
+<div class="callout">
+  <span class="label">Important</span>
+  <p>
+    <code>SANDBOX_MODE=local</code> runs test commands directly on the host with a scrubbed
+    environment, a timeout, process-group termination and POSIX resource limits. It is a
+    convenience for trusted local development. It is <strong>not a security boundary</strong> for
+    hostile repository code. Docker mode — internal network, non-root UID 10001, read-only root
+    filesystem, all capabilities dropped, memory and PID limits — is the supported configuration for
+    untrusted repositories.
+  </p>
+</div>
+
+<h3>9.3 Fail-closed details worth naming</h3>
+<ul>
+  <li>The worker refuses every command when <code>SANDBOX_TOKEN</code> is unset, rather than defaulting open.</li>
+  <li>Token comparison uses a constant-time comparison in both the API guard and the worker.</li>
+  <li>Validation defaults <code>passed = False</code>; a check must actively succeed.</li>
+  <li>Provider errors and unexpected exceptions are redacted before being stored or returned.</li>
+  <li>Authenticated clone URLs exist only in memory for the duration of a git call.</li>
+</ul>
+
+<!-- ============================== 10 ============================== -->
+<h2>10 · Demo mode: why deterministic fixtures exist</h2>
+<p class="lead">
+  A demo that fakes its results teaches the wrong thing. AutoDev's demo mode is built on the opposite
+  constraint: everything except the model must be real.
+</p>
+
+<h3>10.1 The problem it solves</h3>
+<p>
+  Reviewers, CI and new contributors rarely have a GitHub token and an AI key available at the same
+  time. Without a credential-free path, the honest options are "the project cannot be run" or "the
+  project pretends". Both are unacceptable for a system whose entire claim is verifiability.
+</p>
+
+<h3>10.2 How it works</h3>
+<ul>
+  <li>A real calculator repository ships in <code>backend/demo_repo</code>, with a genuine bug in <code>multiply</code> and a pytest suite that covers it.</li>
+  <li>On first start the backend materialises a local git repository under <code>data/workspaces/_demo_source</code> and seeds tasks and issues from fixtures.</li>
+  <li>With no <code>AI_API_KEY</code> (or <code>AI_PROVIDER=demo</code>), the provider returns a fixture plan and change set keyed to the task.</li>
+  <li>The rest of the pipeline is unchanged: real clone, real file writes, real pytest in the sandbox, real failure correction, real validation, real commit, real diff.</li>
+</ul>
+
+<h3>10.3 The honesty rules</h3>
+<table>
+  <thead><tr><th>Rule</th><th>Where it is enforced</th></tr></thead>
+  <tbody>
+    <tr><td>Demo mode is never presented as a model run</td><td><code>is_fixture</code> flag; warnings in the execution log; "demo fixtures" label in the UI; commit message and PR note</td></tr>
+    <tr><td>A fixture never fabricates a test result or a diff</td><td>Test counts come from the subprocess; diffs come from git</td></tr>
+    <tr><td>Unsupported tasks fail honestly</td><td>The fixture provider raises a typed error when no fixture matches, rather than returning invented code</td></tr>
+    <tr><td>Demo mode relaxes no security control</td><td>Same validator, same sandbox, same path rules</td></tr>
+  </tbody>
+</table>
+
+<h3>10.4 Why fixtures are not "mocked AI"</h3>
+<p>
+  A mock replaces the system under test. Here the system under test is the <em>pipeline</em> — the
+  model is a replaceable input. Pinning that input to a deterministic value is what makes the
+  pipeline testable at all: the same task must produce the same edits, the same failing test, the
+  same correction and the same validation report, on every machine and in CI.
+</p>
+
+<!-- ============================== 11 ============================== -->
+<h2>11 · Data model and persistence</h2>
+
+<table>
+  <thead><tr><th style="width:38mm">Table</th><th>Key fields</th><th>Purpose and invariants</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><code>repositories</code></td>
+      <td>owner, name, default_branch, language, visibility, clone_url, html_url, is_demo, connected, analysis_json, analyzed_at</td>
+      <td>Connected GitHub metadata plus the latest analysis snapshot. <code>full_name</code> is derived, not stored. Demo repositories are flagged, not special-cased elsewhere.</td>
+    </tr>
+    <tr>
+      <td><code>development_tasks</code></td>
+      <td>repository_id, github_issue_number, title, description, priority, status, labels_json, source</td>
+      <td>Issue-linked or custom unit of work. Cascade-deletes with its repository.</td>
+    </tr>
+    <tr>
+      <td><code>agent_executions</code></td>
+      <td>task_id, status, current_stage, timings, plan_json, plan_approved, validation_json, files_inspected_json, provider, model, token counts, correction_attempts, workspace_path, branch_name, base_branch, diff_json, errors</td>
+      <td>One row per attempt. Status is the source of truth for the UI; JSON columns are parsed by typed properties, never trusted as strings in templates.</td>
+    </tr>
+    <tr>
+      <td><code>file_changes</code></td>
+      <td>execution_id, file_path, change_type, diff, additions, deletions, original_content, modified_content</td>
+      <td>Per-file evidence. Content is capped at 120,000 characters so a generated binary or giant file cannot bloat the database.</td>
+    </tr>
+    <tr>
+      <td><code>test_executions</code></td>
+      <td>execution_id, command, status, output, summary, passed_count, failed_count, duration, attempt</td>
+      <td>Every attempt, including failures. This is what makes the correction loop auditable.</td>
+    </tr>
+    <tr>
+      <td><code>agent_logs</code></td>
+      <td>execution_id, level, stage, message, created_at</td>
+      <td>Ordered log stream with ids used as replay cursors for SSE and <code>/logs</code>.</td>
+    </tr>
+    <tr>
+      <td><code>pull_requests</code></td>
+      <td>execution_id (unique), number, title, body, url, branch, base_branch, status</td>
+      <td>At most one PR per execution, enforced by a unique index as well as an application check.</td>
+    </tr>
+    <tr>
+      <td><code>app_settings</code></td>
+      <td>key, value, updated_at</td>
+      <td>Validated runtime overrides of environment defaults (correction budget, timeouts, file limit, concurrency, approval gates, test command).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>11.1 Why JSON columns instead of fully normalised plans</h3>
+<p>
+  Plans, validation reports and diffs are written once and read whole; they are documents, not
+  query dimensions. Storing them as JSON keeps the schema stable while the plan format evolves, and
+  the fields that <em>are</em> queried — status, stage, timestamps, branch, counts — are real columns
+  with indexes. The compromise is that a malformed JSON blob is possible in principle; the typed
+  properties return <code>None</code> instead of raising, and only code that already handles a missing
+  plan can receive one.
+</p>
+
+<h3>11.2 Append-only history</h3>
+<p>
+  Nothing overwrites a completed execution. Retry creates a new execution; cancelling sets a terminal
+  status; a backend restart marks interrupted runs failed. Logs and file changes are never edited.
+  The dashboard therefore reports trends over real history rather than over the latest state of each
+  task.
+</p>
+
+<!-- ============================== 12 ============================== -->
+<h2>12 · API design</h2>
+<p class="lead">
+  REST with resource-oriented paths, cursor-free page/page_size pagination, one error envelope and
+  one streaming endpoint. The full interactive contract is served at <code>/docs</code> from the
+  FastAPI schema; this section records the shape and the reasoning.
+</p>
+
+<table>
+  <thead><tr><th style="width:18mm">Method</th><th style="width:62mm">Path</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td>GET</td><td><code>/api/health</code></td><td>Liveness, database reachability, demo-mode flag. The only unauthenticated route.</td></tr>
+    <tr><td>GET</td><td><code>/api/system/info</code></td><td>Version, effective provider, sandbox mode, configured limits.</td></tr>
+    <tr><td>GET</td><td><code>/api/system/status</code></td><td>Per-component status; GitHub is <em>verified</em> by an authenticated call, never assumed from configuration.</td></tr>
+    <tr><td>GET</td><td><code>/api/dashboard/stats</code></td><td>Stored metrics, 14-day activity series and recent activity.</td></tr>
+    <tr><td>GET / POST</td><td><code>/api/repositories</code>, <code>/connect</code></td><td>List with search, visibility filter and paging; connect an <code>owner/name</code>.</td></tr>
+    <tr><td>GET / POST</td><td><code>/api/repositories/{id}</code>, <code>/analyze</code>, <code>/refresh</code>, <code>/issues</code></td><td>Detail with latest analysis; re-clone and index; refresh metadata; list issues (fixtures for the demo repo).</td></tr>
+    <tr><td>GET / POST</td><td><code>/api/tasks</code></td><td>Filtered queue; create a custom task.</td></tr>
+    <tr><td>POST</td><td><code>/api/tasks/{id}/execute</code></td><td>Queue an execution, subject to the concurrency limit.</td></tr>
+    <tr><td>GET</td><td><code>/api/executions</code></td><td>History with status, search, sort, order and paging.</td></tr>
+    <tr><td>GET</td><td><code>/api/executions/{id}</code></td><td>Full detail: plan, timeline, validation, tests, changes, summary.</td></tr>
+    <tr><td>GET</td><td><code>/api/executions/{id}/logs</code></td><td>Persisted logs with a limit, for replay.</td></tr>
+    <tr><td>GET</td><td><code>/api/executions/{id}/stream</code></td><td>SSE: <code>log</code>, <code>state</code> and <code>end</code> events.</td></tr>
+    <tr><td>POST</td><td><code>/api/executions/{id}/approve-plan</code></td><td>Release the plan gate.</td></tr>
+    <tr><td>POST</td><td><code>/api/executions/{id}/cancel</code></td><td>Request cancellation at the next checkpoint and in the sandbox.</td></tr>
+    <tr><td>POST</td><td><code>/api/executions/{id}/retry</code></td><td>New execution from the same task.</td></tr>
+    <tr><td>GET</td><td><code>/api/executions/{id}/diff</code>, <code>/diff/patch</code></td><td>Structured per-file diffs and unified text; downloadable <code>.patch</code>.</td></tr>
+    <tr><td>GET / POST</td><td><code>/api/executions/{id}/pr-draft</code>, <code>/create-pr</code></td><td>Evidence-based draft; PR creation gated by <code>confirm: true</code>.</td></tr>
+    <tr><td>GET</td><td><code>/api/pull-requests</code></td><td>Pull requests created by AutoDev, with search, status and paging.</td></tr>
+    <tr><td>GET / PUT</td><td><code>/api/settings</code></td><td>Runtime settings with masked provider info; validated updates.</td></tr>
+  </tbody>
+</table>
+
+<h3>12.1 SSE event contract</h3>
+<pre><code>data: {"type":"log","id":42,"level":"info","stage":"tests","message":"8 passed in 0.41s","created_at":"…"}
+data: {"type":"state","status":"awaiting_approval","stage":"awaiting_plan_approval"}
+data: {"type":"end","status":"completed"}</code></pre>
+<p>
+  The stream is a notification channel, not a data source. On <code>state</code> or
+  <code>end</code>, the client re-fetches the execution so it renders persisted truth. That single
+  rule removes a whole class of race conditions and is why a dropped connection is harmless.
+</p>
+
+<h3>12.2 Authentication on the stream</h3>
+<p>
+  <code>EventSource</code> cannot set an <code>Authorization</code> header, so the SSE route alone
+  also accepts <code>?token=</code>. This is a deliberate, documented trade-off: the token can appear
+  in server access logs, which is why the API is expected to sit behind TLS and a trusted proxy, and
+  why the token is scoped to this single-operator service rather than a user session.
+</p>
+
+<!-- ============================== 13 ============================== -->
+<h2>13 · Frontend architecture and design language</h2>
+
+<h3>13.1 Structure</h3>
+<table>
+  <thead><tr><th style="width:42mm">Area</th><th>Contents</th></tr></thead>
+  <tbody>
+    <tr><td><code>pages/</code></td><td>Overview, Repositories, RepositoryDetail, Tasks, Workspace, PullRequests, History, Settings, NotFound</td></tr>
+    <tr><td><code>components/</code></td><td>App-level primitives (<code>ui.tsx</code>), PageHeader, StatCard, StatusBadge, ActivityChart, ExecutionTimeline, ExecutionTerminal, DiffViewer, DiffModal, ToastProvider</td></tr>
+    <tr><td><code>hooks/</code></td><td><code>useApiQuery</code> (loading/error/refetch), <code>useExecutionStream</code> (EventSource lifecycle, reconnection, state refresh)</td></tr>
+    <tr><td><code>services/api.ts</code></td><td>Typed fetch client, error-envelope parsing, optional bearer token, patch download</td></tr>
+    <tr><td><code>utils/</code></td><td>Local LCS diff computation, formatting (durations, relative time, numbers, bytes)</td></tr>
+    <tr><td><code>types/</code></td><td>Hand-maintained mirrors of the API contracts</td></tr>
+  </tbody>
+</table>
+
+<h3>13.2 The visual language: an engineering console, not a SaaS landing page</h3>
+<p>
+  The interface was deliberately designed to read as a working instrument — a field manual or an
+  operations console — rather than a generated product page. That is a functional choice as much as
+  an aesthetic one: this UI is used for long, dense, evidence-heavy review sessions.
+</p>
+<table>
+  <thead><tr><th style="width:36mm">Decision</th><th>Implementation</th><th>Reason</th></tr></thead>
+  <tbody>
+    <tr><td>Warm ink and bone</td><td>Near-black warm surfaces, off-white text, one signal-orange accent</td><td>Reduces glare over long sessions and avoids the blue-violet gradient look that reads as generic</td></tr>
+    <tr><td>Editorial typography</td><td>Newsreader serif for page titles, IBM Plex Sans for body, IBM Plex Mono for metadata</td><td>Serif titles give hierarchy without size inflation; mono makes identifiers, counts and statuses scannable</td></tr>
+    <tr><td>Flat surfaces</td><td>Hairline borders, no shadows, no blur, small radii</td><td>Nested translucent cards obscure structure; flat panels keep dense tables readable</td></tr>
+    <tr><td>Square status tags</td><td>Mono uppercase labels with semantic tints</td><td>Status is data, not decoration; colour is muted so it never competes with the accent</td></tr>
+    <tr><td>Numbered navigation</td><td>Section indices in the sidebar, build stamp at the bottom</td><td>Reinforces the manual/console metaphor and makes location unambiguous</td></tr>
+    <tr><td>Dense tables</td><td>Reduced cell padding, tabular numerals, no zebra striping</td><td>History fits without horizontal scrolling; rows align visually for comparison</td></tr>
+    <tr><td>Editorial empty states</td><td>Left-aligned rule, mono eyebrow, serif heading</td><td>A centred dashed placeholder is the most recognisable generated-UI pattern; the replacement explains the next action instead</td></tr>
+  </tbody>
+</table>
+
+<h3>13.3 Theme as configuration</h3>
+<p>
+  Palette, type scale, radii and shadows live in <code>tailwind.config.js</code>; semantic names
+  (<code>indigo</code> → accent, <code>slate</code> → warm neutral, success/error/warning → muted
+  sage/rust/ochre) are remapped there so page code stays readable and a future restyle is central.
+  Component-level rules — flat panels, mono labels, table density, focus and selection styles — live
+  in <code>index.css</code>. Custom-colour opacity inside <code>@apply</code> is avoided because
+  PostCSS cannot resolve it; those cases use raw CSS.
+</p>
+
+<h3>13.4 Diff rendering</h3>
+<p>
+  The backend supplies per-file unified diffs from git. The frontend computes a line-level LCS to
+  align old and new sides for the split view, and renders the unified view directly. Both modes share
+  line numbering, add/remove colouring and contained horizontal scrolling. Nothing is fetched from a
+  CDN, so the viewer works in an air-gapped deployment and the diff never leaves the browser.
+</p>
+
+<h3>13.5 Data fetching and live state</h3>
+<p>
+  <code>useApiQuery</code> handles the ordinary request lifecycle with an abort signal and a manual
+  refetch. <code>useExecutionStream</code> opens an <code>EventSource</code> only while an execution
+  is active, appends log events, refetches execution detail on <code>state</code>/<code>end</code>,
+  and closes the stream on unmount. Polling exists purely as a fallback when the stream cannot be
+  established. The backend is always the source of truth.
+</p>
+
+<!-- ============================== 14 ============================== -->
+<h2>14 · The sandbox worker</h2>
+<p>
+  The worker exists so that "run this repository's tests" can happen somewhere other than the process
+  holding the GitHub token. It is a small FastAPI service that accepts
+  <code>{args, cwd, timeout}</code> and returns status, exit code, output and duration.
+</p>
+
+<h3>14.1 Defences, layer by layer</h3>
+<table>
+  <thead><tr><th>Layer</th><th>Control</th></tr></thead>
+  <tbody>
+    <tr><td>Network</td><td>Attached only to an <code>internal: true</code> Compose network; never published to the host; the backend reaches it by service name.</td></tr>
+    <tr><td>Authentication</td><td><code>X-Sandbox-Token</code> compared with <code>hmac.compare_digest</code>; an unset token refuses every request.</td></tr>
+    <tr><td>Command</td><td>Bare executable only, re-validated against the allowlist inside the worker; control characters and over-long arguments rejected.</td></tr>
+    <tr><td>Filesystem</td><td><code>cwd</code> resolved under <code>WORKSPACES_ROOT</code> and required to exist; the container root filesystem is read-only with a 256 MB tmpfs for <code>/tmp</code>.</td></tr>
+    <tr><td>Identity</td><td>Non-root UID 10001, all capabilities dropped, <code>no-new-privileges</code>.</td></tr>
+    <tr><td>Resources</td><td>2 GB memory, 2 CPUs, 256 PID limit, per-request timeout, process-group <code>SIGKILL</code> on timeout.</td></tr>
+    <tr><td>Environment</td><td>Credential-shaped variables stripped; <code>HOME</code> and <code>TMPDIR</code> redirected to <code>/tmp</code>; deterministic non-interactive flags.</td></tr>
+  </tbody>
+</table>
+
+<h3>14.2 Why a separate service instead of a subprocess</h3>
+<p>
+  A subprocess inherits the backend's environment, filesystem and privileges unless every one of those
+  is manually narrowed. A container boundary makes the narrowing structural: the workspace is the only
+  shared mount, the network is internal, the root filesystem is immutable and the process runs as an
+  unprivileged user. The worker re-validates the allowlist and path on its side because a compromised
+  backend should not be able to turn the worker into an arbitrary executor.
+</p>
+
+<!-- ============================== 15 ============================== -->
+<h2 class="startpage">15 · Configuration reference</h2>
+<p class="lead">
+  Configuration is environment-first with validated runtime overrides. Secrets are read only by the
+  backend; the API exposes booleans and masked values, never the values themselves.
+</p>
+
+<table>
+  <thead><tr><th style="width:52mm">Variable</th><th style="width:34mm">Default</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td><code>DATABASE_URL</code></td><td><code>sqlite:///./autodev.db</code></td><td>SQLAlchemy URL; Compose uses <code>sqlite:////data/autodev.db</code>.</td></tr>
+    <tr><td><code>WORKSPACE_DIR</code></td><td><code>./data/workspaces</code></td><td>Root for per-execution clones and the demo source.</td></tr>
+    <tr><td><code>DEMO_REPO_DIR</code></td><td><code>./backend/demo_repo</code></td><td>Bundled calculator repository.</td></tr>
+    <tr><td><code>AUTODEV_API_TOKEN</code></td><td>empty</td><td>When set, every API route except health requires a bearer token.</td></tr>
+    <tr><td><code>CORS_ORIGINS</code></td><td>localhost Vite origins</td><td>Browser origin allowlist.</td></tr>
+    <tr><td><code>GITHUB_TOKEN</code></td><td>empty</td><td>PAT with metadata read, contents read/write, issues read, PRs read/write.</td></tr>
+    <tr><td><code>GITHUB_APP_ID</code>, <code>GITHUB_APP_PRIVATE_KEY</code>, <code>GITHUB_APP_INSTALLATION_ID</code></td><td>empty</td><td>GitHub App alternative; all three required together. Literal <code>\n</code> in the key is unescaped.</td></tr>
+    <tr><td><code>GITHUB_API_URL</code></td><td><code>https://api.github.com</code></td><td>GitHub Enterprise support.</td></tr>
+    <tr><td><code>GITHUB_DEFAULT_BASE_BRANCH</code></td><td>empty</td><td>Override the repository default for pull requests.</td></tr>
+    <tr><td><code>AI_PROVIDER</code></td><td><code>auto</code></td><td><code>auto</code> uses the model when a key exists, otherwise fixtures; <code>openai</code> requires a key; <code>demo</code> forces fixtures.</td></tr>
+    <tr><td><code>AI_API_KEY</code></td><td>empty</td><td>Any OpenAI-compatible key. Never sent to the browser.</td></tr>
+    <tr><td><code>AI_BASE_URL</code>, <code>AI_MODEL</code></td><td>OpenAI defaults</td><td>Any compatible endpoint and model name.</td></tr>
+    <tr><td><code>AI_MAX_CONTEXT_CHARS</code></td><td><code>60000</code></td><td>Hard budget for selected file content.</td></tr>
+    <tr><td><code>AI_TEMPERATURE</code>, <code>AI_MAX_TOKENS</code></td><td><code>0.1</code>, <code>4096</code></td><td>Low temperature and a bounded completion size for predictable structured output.</td></tr>
+    <tr><td><code>AGENT_MAX_CORRECTION_ATTEMPTS</code></td><td><code>2</code></td><td>Failure-correction cap, validated 0–5.</td></tr>
+    <tr><td><code>AGENT_EXECUTION_TIMEOUT</code></td><td><code>600</code></td><td>Whole-execution timeout in seconds.</td></tr>
+    <tr><td><code>AGENT_TEST_TIMEOUT</code></td><td><code>180</code></td><td>Per-command timeout.</td></tr>
+    <tr><td><code>AGENT_MAX_FILES_MODIFIED</code></td><td><code>10</code></td><td>Edit scope limit, enforced by the editor and the validator.</td></tr>
+    <tr><td><code>AGENT_MAX_CONCURRENT_TASKS</code></td><td><code>2</code></td><td>In-process worker concurrency.</td></tr>
+    <tr><td><code>REQUIRE_PLAN_APPROVAL</code></td><td><code>true</code></td><td>Pause before any file is modified.</td></tr>
+    <tr><td><code>REQUIRE_PR_APPROVAL</code></td><td><code>true</code></td><td>Require <code>confirm: true</code> to create a pull request.</td></tr>
+    <tr><td><code>ALLOWED_COMMANDS</code></td><td><code>python,python3,pytest,npm,node,yarn,pnpm,ruff,tsc,go,cargo</code></td><td>Bare executable allowlist; shell interpreters and inline eval are rejected regardless.</td></tr>
+    <tr><td><code>SANDBOX_MODE</code></td><td><code>local</code></td><td><code>local</code> host subprocess or <code>docker</code> worker HTTP.</td></tr>
+    <tr><td><code>SANDBOX_URL</code>, <code>SANDBOX_TOKEN</code></td><td><code>http://127.0.0.1:8010</code>, dev default</td><td>Worker endpoint and shared secret in Docker mode.</td></tr>
+  </tbody>
+</table>
+
+<h3>15.1 Runtime overrides vs environment</h3>
+<p>
+  Agent and testing knobs can be changed from the Settings page and are validated server-side:
+  numeric ranges, bare command names, and branch syntax. Credentials and infrastructure settings —
+  tokens, database URL, sandbox mode — are environment-only and require a restart, because changing
+  them at runtime would silently alter the security boundary.
+</p>
+
+<!-- ============================== 16 ============================== -->
+<h2>16 · Deployment: local, Docker, production</h2>
+
+<h3>16.1 Local development</h3>
+<pre><code># backend
+python -m venv backend/.venv
+backend/.venv/Scripts/python.exe -m pip install -r backend/requirements-dev.txt
+cd backend &amp;&amp; ./.venv/Scripts/python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+
+# frontend (second terminal)
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev
+# http://127.0.0.1:5173  ·  API docs http://127.0.0.1:8000/docs</code></pre>
+<p>
+  On first start the backend creates the schema, materialises the demo repository and seeds tasks.
+  The Vite dev server proxies <code>/api</code>, including the SSE stream.
+</p>
+
+<h3>16.2 Compose stack</h3>
+<pre><code>cp .env.example .env      # optional: GitHub / AI credentials, tokens
+docker compose up --build
+# http://localhost:8080</code></pre>
+<table>
+  <thead><tr><th style="width:28mm">Service</th><th>Configuration</th></tr></thead>
+  <tbody>
+    <tr><td><code>frontend</code></td><td>nginx serving the built SPA, proxying <code>/api</code> with SSE buffering disabled, <code>/healthz</code> for the healthcheck, published on 8080.</td></tr>
+    <tr><td><code>backend</code></td><td>FastAPI on the internal <code>frontend</code> and <code>sandbox</code> networks; persists <code>/data</code> and shares <code>/workspaces</code>; waits for the worker; healthcheck on <code>/api/health</code>.</td></tr>
+    <tr><td><code>worker</code></td><td>Sandbox-only container, non-root, read-only root, capabilities dropped, 2 GB / 2 CPU / 256 PID limits, no host port.</td></tr>
+  </tbody>
+</table>
+<p>
+  Named volumes keep the database and workspaces across restarts; <code>docker compose down -v</code>
+  deletes them. Set a unique <code>SANDBOX_TOKEN</code> before any shared deployment.
+</p>
+
+<h3>16.3 Production checklist</h3>
+<ol>
+  <li>Terminate TLS in front of nginx; never expose ports 8000 or 8010.</li>
+  <li>Set a strong <code>AUTODEV_API_TOKEN</code> and a unique <code>SANDBOX_TOKEN</code>.</li>
+  <li>Use <code>SANDBOX_MODE=docker</code> for any untrusted repository.</li>
+  <li>Use a fine-grained GitHub token or a GitHub App limited to selected repositories.</li>
+  <li>Keep both approval gates enabled.</li>
+  <li>Restrict sandbox egress; the Compose network is already <code>internal: true</code>.</li>
+  <li>Back up <code>/data</code> and treat it as sensitive: it contains source snippets and diffs.</li>
+  <li>Pin dependencies and rebuild images regularly; review CodeQL results.</li>
+</ol>
+
+<!-- ============================== 17 ============================== -->
+<h2>17 · Testing and quality strategy</h2>
+<p class="lead">
+  The test strategy follows the trust model: the most valuable tests are the ones that prove a
+  dangerous operation is refused, and the ones that run the real pipeline against a real git
+  repository rather than a mock.
+</p>
+
+<h3>17.1 Backend</h3>
+<table>
+  <thead><tr><th style="width:52mm">Area</th><th>What is asserted</th></tr></thead>
+  <tbody>
+    <tr><td>End-to-end pipeline</td><td>Real clone of a temporary repository, analysis, plan, edits, pytest run, diff, validation and branch — with the demo provider and with mocked provider responses.</td></tr>
+    <tr><td>Failure correction</td><td>A failing test triggers exactly the configured number of corrections; an uncorrectable failure ends as <code>failed</code> with output preserved.</td></tr>
+    <tr><td>Approval and cancellation</td><td>Execution pauses before edits; approval resumes it; cancellation produces a terminal state and a preserved workspace.</td></tr>
+    <tr><td>API contracts</td><td>Status codes, pagination, error envelope, PR gating, settings validation, health and system status.</td></tr>
+    <tr><td>Path safety</td><td>Traversal, absolute paths, denied directories, protected filenames, binary suffixes, symlink escapes and the file-count budget.</td></tr>
+    <tr><td>Command policy</td><td>Metacharacters, shell interpreters, inline evaluation, non-allowlisted modules, package-manager subcommands, bare-name normalisation.</td></tr>
+    <tr><td>Secrets</td><td>Scanning finds token formats and credential assignments; redaction removes them from logs and errors; prompt wrapping delimits untrusted content.</td></tr>
+    <tr><td>GitHub integration</td><td>Mocked PyGithub: metadata mapping, issues, PR creation, auth failures surfaced as typed errors.</td></tr>
+    <tr><td>Validation</td><td>Each check fails closed, warnings do not block, secrets always block.</td></tr>
+  </tbody>
+</table>
+<p><strong>Result:</strong> 36 tests pass; Ruff reports no findings under the project ruleset.</p>
+
+<h3>17.2 Frontend</h3>
+<table>
+  <thead><tr><th style="width:52mm">File</th><th>Coverage</th></tr></thead>
+  <tbody>
+    <tr><td><code>utils/format.test.ts</code></td><td>Duration, relative time, pluralisation, number and byte formatting</td></tr>
+    <tr><td><code>components/DiffViewer.test.tsx</code></td><td>Line alignment, add/remove classification, unified and split rendering</td></tr>
+    <tr><td><code>pages/Overview.test.tsx</code></td><td>Dashboard metrics, chart series and recent activity from a mocked API</td></tr>
+    <tr><td><code>pages/Tasks.test.tsx</code></td><td>Task creation from an issue, filtering and execution hand-off</td></tr>
+    <tr><td><code>pages/Workspace.test.tsx</code></td><td>Execution detail, plan approval state, diff modal and PR-draft gating</td></tr>
+  </tbody>
+</table>
+<p><strong>Result:</strong> 5 files, 12 tests pass; ESLint and TypeScript are clean; the production build succeeds.</p>
+
+<h3>17.3 What is not covered</h3>
+<ul>
+  <li>No browser end-to-end suite: SSE reconnection and layout are verified manually in the running app, not automatically.</li>
+  <li>No load or concurrency stress test; the concurrency limit is exercised functionally, not under pressure.</li>
+  <li>No security fuzzing; the allowlist and path rules are tested by example, not exhaustively.</li>
+  <li>Real GitHub and real model calls are unverified in this working tree because no credentials were configured.</li>
+</ul>
+
+<!-- ============================== 18 ============================== -->
+<h2>18 · Limitations, trade-offs and honest gaps</h2>
+<table>
+  <thead><tr><th style="width:48mm">Limitation</th><th>Consequence</th><th style="width:56mm">Mitigation or path forward</th></tr></thead>
+  <tbody>
+    <tr><td>In-process execution worker</td><td>An execution does not survive a backend restart; queued and running work is marked failed.</td><td>Logs, diffs and attempts are retained and the task can be retried; a durable queue is the natural next step.</td></tr>
+    <tr><td>SQLite</td><td>Single backend instance; write contention under high concurrency.</td><td>SQLAlchemy keeps a PostgreSQL move to a URL change plus migrations.</td></tr>
+    <tr><td>No dependency installation</td><td>The sandbox runs the repository as-is; a project whose dependencies are missing cannot be tested.</td><td>Pre-bake dependencies in the worker image or extend it per project.</td></tr>
+    <tr><td>Worker image runtimes</td><td>Python, Node.js, npm and common test tools only.</td><td>Extend <code>worker/Dockerfile</code> for Go, Rust, JVM or other toolchains.</td></tr>
+    <tr><td>No inbound webhooks</td><td>Issues and repositories are read on explicit user action, not pushed on GitHub events.</td><td>A webhook route with signature verification is an additive change.</td></tr>
+    <tr><td>Fixtures limited to the demo repo</td><td>Without an AI key, a non-demo task fails rather than inventing code.</td><td>Intentional: an honest failure beats fabricated output.</td></tr>
+    <tr><td>Local sandbox is not a boundary</td><td>Hostile test code can affect the host in <code>local</code> mode.</td><td>Use Docker mode; documented prominently in the security policy.</td></tr>
+    <tr><td>Single-operator auth</td><td>One shared bearer token; no users, roles or audit of who approved.</td><td>Adequate for a supervised internal tool; RBAC is future work.</td></tr>
+    <tr><td>Diff size cap</td><td>Very large legitimate refactors are rejected at 750k characters.</td><td>Split the task; the cap protects review quality and storage.</td></tr>
+    <tr><td>No syntax highlighting in diffs</td><td>Review is slightly slower for large files.</td><td>Deliberate: avoids a heavy editor bundle or CDN dependency.</td></tr>
+  </tbody>
+</table>
+
+<h3>18.1 Trade-offs stated as choices</h3>
+<p>
+  Determinism over cleverness: the pipeline is explicit Python, not an agent framework, so it is
+  longer to write and trivial to audit. Safety over autonomy: two human gates mean the system cannot
+  run unattended end to end, by design. Honesty over demo polish: the fixture provider is visibly
+  labelled even though that makes the demo look less impressive. Simplicity over scale: SQLite and an
+  in-process worker fit the intended single-team deployment and are documented rather than disguised.
+</p>
+
+<!-- ============================== 19 ============================== -->
+<h2>19 · Extension points and future work</h2>
+<ol>
+  <li><strong>Durable execution queue.</strong> Move the orchestrator's task registry to a persistent queue (or a database-backed claim loop) so restarts resume rather than fail work. The pipeline itself is already stage-persisted, so the change is bounded.</li>
+  <li><strong>PostgreSQL and migrations.</strong> Replace SQLite for multi-instance deployments; add Alembic to manage schema evolution.</li>
+  <li><strong>GitHub webhooks.</strong> Signed inbound events to enqueue tasks on labelled issues, with the same approval gates.</li>
+  <li><strong>Richer worker images.</strong> Per-language images or a build matrix, plus optional dependency installation in a disposable layer.</li>
+  <li><strong>Multi-file review UX.</strong> Side-by-side file tree, per-file comments and an approval record tied to a reviewer identity.</li>
+  <li><strong>Provider breadth.</strong> The abstraction is five methods; adding a vendor is a new <code>_complete</code> implementation, and a streaming mode would only affect progress reporting.</li>
+  <li><strong>Evaluation harness.</strong> A benchmark of seeded bugs with expected patches, to measure plan quality and correction success over time instead of relying on anecdotes.</li>
+</ol>
+
+<!-- ============================== 20 ============================== -->
+<h2>20 · Appendix</h2>
+
+<h3>20.1 Repository map</h3>
+<pre><code>.
+├── backend/
+│   ├── app/
+│   │   ├── agent/            orchestrator, analyzer, context, planner, editor,
+│   │   │                     test executor, failure analyzer, validator, git, PR, ai/
+│   │   ├── api/routes/       health, dashboard, repositories, tasks, executions,
+│   │   │                     pull_requests, settings
+│   │   ├── core/             config, security, errors, redaction, files, logging
+│   │   ├── database/         base, session
+│   │   ├── integrations/     github service (PAT + App)
+│   │   ├── models/ schemas/  persistence and API contracts
+│   │   ├── services/         demo seed, fixtures, settings, execution, repository
+│   │   └── main.py
+│   ├── demo_repo/            real calculator with a bug and a pytest suite
+│   └── tests/                36 pytest tests
+├── frontend/
+│   ├── src/                  pages, components, hooks, services, utils, types
+│   ├── tailwind.config.js    palette, type, radius, shadow tokens
+│   ├── nginx.conf            SPA + /api proxy with SSE buffering off
+│   └── Dockerfile
+├── worker/                   isolated sandbox service
+├── docs/                     architecture, API, screenshots, this document
+├── .github/workflows/        backend-ci, frontend-ci, docker-build, security
+├── docker-compose.yml
+├── .env.example
+├── SECURITY.md
+└── LICENSE (MIT)</code></pre>
+
+<h3>20.2 Glossary</h3>
+<table>
+  <thead><tr><th style="width:38mm">Term</th><th>Meaning in this project</th></tr></thead>
+  <tbody>
+    <tr><td>Execution</td><td>One run of the pipeline for one task. Has a status, a stage, logs and artefacts; never overwritten.</td></tr>
+    <tr><td>Stage</td><td>A named step inside an execution (<code>planning</code>, <code>running_tests</code>, <code>validating_changes</code>…), persisted as it changes.</td></tr>
+    <tr><td>Plan gate</td><td>The pause before any file is modified, released by <code>approve-plan</code>.</td></tr>
+    <tr><td>PR gate</td><td>The requirement for <code>confirm: true</code> before a branch is pushed and a pull request opened.</td></tr>
+    <tr><td>Change set</td><td>A validated list of create/update/delete operations proposed by the provider.</td></tr>
+    <tr><td>Fixture provider</td><td>Deterministic replacement for the model, used when no API key is configured. Not a mock of the pipeline.</td></tr>
+    <tr><td>Validation report</td><td>The structured pass/fail record of branch, scope, path, binary, size, secret and test checks.</td></tr>
+    <tr><td>Workspace</td><td>The isolated git clone for one execution, under <code>WORKSPACE_DIR/execution-N</code>.</td></tr>
+    <tr><td>Sandbox</td><td>The component that executes allowlisted test commands — host subprocess (local) or worker container (docker).</td></tr>
+  </tbody>
+</table>
+
+<h3>20.3 Verification record</h3>
+<table>
+  <thead><tr><th style="width:62mm">Command</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td><code>backend/.venv/Scripts/python.exe -m pytest -q</code></td><td>36 passed</td></tr>
+    <tr><td><code>backend/.venv/Scripts/python.exe -m ruff check .</code></td><td>All checks passed</td></tr>
+    <tr><td><code>npm run lint</code></td><td>No warnings</td></tr>
+    <tr><td><code>npm run typecheck</code></td><td>No errors</td></tr>
+    <tr><td><code>npm test</code></td><td>5 files, 12 tests passed</td></tr>
+    <tr><td><code>npm run build</code></td><td>Built successfully; ~35.8 kB CSS, ~740 kB JS (chunk-size warning only)</td></tr>
+    <tr><td><code>docker compose config --quiet</code></td><td>Valid</td></tr>
+    <tr><td>Live demo execution</td><td>Plan approved, 2 files changed (+14/−2), 8 pytest tests passed, validation passed, branch <code>autodev/fix-the-multiplication-function-and-1</code></td></tr>
+    <tr><td>Worker, native</td><td>Health 200; missing/bad token 401; traversal 400; shell 400; real pytest run passed 5 tests</td></tr>
+  </tbody>
+</table>
+<p class="small">
+  Docker image builds and live GitHub/AI flows were not exercised in this working tree: the Docker
+  daemon was not running and no credentials were configured. Those are reported as unverified rather
+  than assumed working.
+</p>
+
+<footer class="note">
+  AutoDev v0.1.0 · MIT licensed · This document describes the implementation in this repository.
+  For the operational security guidance that accompanies it, read <code>SECURITY.md</code>; for the
+  endpoint-by-endpoint contract, see <code>docs/API.md</code> and the live OpenAPI schema at
+  <code>/docs</code>.
+</footer>
+
+</body>
+</html>

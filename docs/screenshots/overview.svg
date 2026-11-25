@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" role="img" aria-label="Placeholder for the AutoDev overview dashboard screenshot">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#090b11"/>
+      <stop offset="1" stop-color="#0e1018"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <rect x="0" y="0" width="248" height="900" fill="#0b0d14"/>
+  <rect x="248" y="0" width="1192" height="64" fill="#0b0d14"/>
+  <circle cx="40" cy="32" r="14" fill="url(#accent)"/>
+  <text x="66" y="38" fill="#f1f5f9" font-family="Inter, Arial" font-size="17" font-weight="600">AutoDev</text>
+  <g fill="#94a3b8" font-family="Inter, Arial" font-size="14">
+    <text x="72" y="126">Overview</text>
+    <text x="72" y="168">Repositories</text>
+    <text x="72" y="210">Issues &amp; Tasks</text>
+    <text x="72" y="252">Agent Workspace</text>
+    <text x="72" y="294">Pull Requests</text>
+    <text x="72" y="336">Execution History</text>
+    <text x="72" y="378">Settings</text>
+  </g>
+  <text x="288" y="112" fill="#818cf8" font-family="Inter, Arial" font-size="12" font-weight="700" letter-spacing="2">CONTROL CENTER</text>
+  <text x="288" y="152" fill="#f8fafc" font-family="Inter, Arial" font-size="30" font-weight="600">Overview</text>
+  <g>
+    <rect x="288" y="196" width="180" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <rect x="484" y="196" width="180" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <rect x="680" y="196" width="180" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <rect x="876" y="196" width="180" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <rect x="1072" y="196" width="180" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <rect x="1268" y="196" width="132" height="112" rx="16" fill="#11141d" stroke="#ffffff12"/>
+    <g fill="#64748b" font-family="Inter, Arial" font-size="11" letter-spacing="1">
+      <text x="308" y="224">REPOSITORIES</text>
+      <text x="504" y="224">TASKS</text>
+      <text x="700" y="224">COMPLETED</text>
+      <text x="896" y="224">FAILED</text>
+      <text x="1092" y="224">PULL REQUESTS</text>
+      <text x="1288" y="224">AVG DURATION</text>
+    </g>
+    <g fill="#f8fafc" font-family="Inter, Arial" font-size="28" font-weight="600">
+      <text x="308" y="272">2</text>
+      <text x="504" y="272">7</text>
+      <text x="700" y="272">5</text>
+      <text x="896" y="272">2</text>
+      <text x="1092" y="272">1</text>
+      <text x="1288" y="272">42.0s</text>
+    </g>
+  </g>
+  <rect x="288" y="332" width="708" height="300" rx="16" fill="#11141d" stroke="#ffffff12"/>
+  <text x="312" y="368" fill="#e2e8f0" font-family="Inter, Arial" font-size="15" font-weight="600">Agent activity</text>
+  <polyline points="320,560 390,520 460,536 530,470 600,492 670,430 740,456 810,400 880,424 950,380" fill="none" stroke="#34d399" stroke-width="3"/>
+  <polyline points="320,585 390,572 460,590 530,552 600,565 670,530 740,548 810,516 880,536 950,500" fill="none" stroke="#fb7185" stroke-width="2"/>
+  <g stroke="#ffffff0d">
+    <line x1="320" y1="600" x2="970" y2="600"/>
+    <line x1="320" y1="520" x2="970" y2="520"/>
+    <line x1="320" y1="440" x2="970" y2="440"/>
+  </g>
+  <rect x="1016" y="332" width="384" height="300" rx="16" fill="#11141d" stroke="#ffffff12"/>
+  <text x="1040" y="368" fill="#e2e8f0" font-family="Inter, Arial" font-size="15" font-weight="600">System status</text>
+  <g font-family="Inter, Arial" font-size="12">
+    <text x="1040" y="406" fill="#94a3b8">Backend</text><text x="1320" y="406" fill="#34d399">ok</text>
+    <text x="1040" y="440" fill="#94a3b8">Database</text><text x="1320" y="440" fill="#34d399">ok</text>
+    <text x="1040" y="474" fill="#94a3b8">GitHub</text><text x="1288" y="474" fill="#fbbf24">unverified</text>
+    <text x="1040" y="508" fill="#94a3b8">AI provider</text><text x="1288" y="508" fill="#22d3ee">demo</text>
+    <text x="1040" y="542" fill="#94a3b8">Sandbox</text><text x="1320" y="542" fill="#34d399">ok</text>
+    <text x="1040" y="576" fill="#94a3b8">Worker</text><text x="1300" y="576" fill="#34d399">running</text>
+  </g>
+  <rect x="288" y="656" width="1112" height="196" rx="16" fill="#11141d" stroke="#ffffff12"/>
+  <text x="312" y="692" fill="#e2e8f0" font-family="Inter, Arial" font-size="15" font-weight="600">Recent agent activity</text>
+  <g font-family="Inter, Arial" font-size="12">
+    <text x="336" y="736" fill="#cbd5e1">Fix multiplication in calculator</text>
+    <text x="740" y="736" fill="#94a3b8">octocat/demo-calculator</text>
+    <text x="1040" y="736" fill="#34d399">completed</text>
+    <text x="336" y="778" fill="#cbd5e1">Handle divide by zero</text>
+    <text x="740" y="778" fill="#94a3b8">octocat/demo-calculator</text>
+    <text x="1040" y="778" fill="#fbbf24">awaiting approval</text>
+  </g>
+  <text x="720" y="875" text-anchor="middle" fill="#475569" font-family="Inter, Arial" font-size="12">
+    Placeholder: replace with a real screenshot at docs/screenshots/overview.png
+  </text>
+</svg>

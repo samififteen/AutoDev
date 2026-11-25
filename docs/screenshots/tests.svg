@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="760" viewBox="0 0 1440 760" role="img" aria-label="Placeholder for a real AutoDev test and diff screenshot">
+  <rect width="1440" height="760" fill="#090b11"/>
+  <text x="720" y="112" text-anchor="middle" fill="#818cf8" font-family="Inter, Arial" font-size="12" font-weight="700" letter-spacing="2">VERIFICATION</text>
+  <text x="720" y="162" text-anchor="middle" fill="#f8fafc" font-family="Inter, Arial" font-size="30" font-weight="600">Real tests, real diff, human review</text>
+  <text x="720" y="196" text-anchor="middle" fill="#94a3b8" font-family="Inter, Arial" font-size="14">Placeholder for a screenshot of the validation panel and diff viewer</text>
+  <rect x="140" y="240" width="540" height="380" rx="16" fill="#07080c" stroke="#ffffff12"/>
+  <text x="168" y="278" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">$ python -m pytest -q</text>
+  <g fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="11">
+    <text x="168" y="318">..........</text>
+    <text x="168" y="352" fill="#34d399">8 passed in 0.12s</text>
+    <text x="168" y="410" fill="#94a3b8">Validation</text>
+    <text x="168" y="440" fill="#34d399">✓ 8 tests passed</text>
+    <text x="168" y="468" fill="#34d399">✓ no secrets detected</text>
+    <text x="168" y="496" fill="#34d399">✓ files within max_files_modified</text>
+    <text x="168" y="524" fill="#34d399">✓ branch autodev/fix-multiply-9</text>
+    <text x="168" y="570" fill="#64748b">Commits are only created after all checks pass.</text>
+  </g>
+  <rect x="712" y="240" width="588" height="380" rx="16" fill="#07080c" stroke="#ffffff12"/>
+  <text x="740" y="278" fill="#e2e8f0" font-family="Inter, Arial" font-size="13" font-weight="600">calculator.py</text>
+  <text x="1244" y="278" fill="#34d399" font-family="JetBrains Mono, monospace" font-size="11">+1</text>
+  <text x="1274" y="278" fill="#fb7185" font-family="JetBrains Mono, monospace" font-size="11">-1</text>
+  <g font-family="JetBrains Mono, monospace" font-size="11">
+    <text x="740" y="318" fill="#64748b">8  def multiply(a, b):</text>
+    <rect x="734" y="332" width="540" height="24" fill="#fb718514"/>
+    <text x="740" y="348" fill="#fda4af">9  -    return a + b</text>
+    <rect x="734" y="360" width="540" height="24" fill="#34d39914"/>
+    <text x="740" y="376" fill="#6ee7b7">9  +    return a * b</text>
+    <text x="740" y="410" fill="#64748b">10</text>
+  </g>
+  <text x="720" y="700" text-anchor="middle" fill="#475569" font-family="Inter, Arial" font-size="12">
+    Placeholder: replace with a real screenshot at docs/screenshots/tests.png
+  </text>
+</svg>

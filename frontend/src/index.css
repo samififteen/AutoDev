@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-slate-300 antialiased;
+    background-image: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: rgba(212, 86, 47, 0.35);
+    color: #f5f0e6;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(194, 183, 163, 0.22) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply rounded-sm bg-slate-600/50;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-md border border-white/[0.09] bg-ink-850 shadow-none;
+  }
+
+  .panel-header {
+    @apply flex flex-wrap items-center justify-between gap-3 border-b border-white/[0.08] px-4 py-3.5;
+  }
+
+  .panel-title {
+    @apply font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-slate-300;
+  }
+
+  .label {
+    @apply mb-1.5 block font-mono text-[9px] font-medium uppercase tracking-[0.14em] text-slate-500;
+  }
+
+  .input {
+    @apply w-full rounded-sm border border-white/[0.14] bg-ink-950 px-3 py-2 text-[13px] text-slate-100 placeholder:text-slate-600 transition disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .input:focus {
+    border-color: rgba(226, 116, 82, 0.7);
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(212, 86, 47, 0.28);
+  }
+
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-sm px-3.5 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-40;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent-500 text-ink-950 hover:bg-accent-400;
+  }
+
+  .btn-secondary {
+    @apply btn border border-white/[0.16] bg-transparent text-slate-200 hover:border-white/[0.32] hover:bg-white/[0.04];
+  }
+
+  .btn-ghost {
+    @apply btn text-slate-400 hover:bg-white/[0.04] hover:text-slate-100;
+  }
+
+  .btn-danger {
+    @apply btn border border-rose-500/30 bg-rose-500/[0.07] text-rose-300 hover:bg-rose-500/[0.14];
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-sm border border-white/[0.12] bg-transparent px-2 py-0.5 font-mono text-[9px] font-medium uppercase tracking-[0.06em] text-slate-400;
+  }
+
+  .table-base {
+    @apply w-full border-collapse text-left text-[12px];
+  }
+
+  .table-base thead th {
+    @apply border-b border-white/[0.09] px-3 py-2.5 font-mono text-[9px] font-medium uppercase tracking-[0.12em] text-slate-500;
+  }
+
+  .table-base tbody td {
+    @apply border-b border-white/[0.05] px-3 py-3 align-middle;
+  }
+
+  .table-base tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .skeleton {
+    @apply animate-pulse-soft rounded-sm bg-white/[0.05];
+  }
+
+  .skeleton::after {
+    content: none;
+  }
+}
+
+.terminal-scroll {
+  scrollbar-color: rgba(212, 86, 47, 0.4) transparent;
+}
+
+.mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.rule-accent {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(212, 86, 47, 0.9) 0,
+    rgba(212, 86, 47, 0.9) 12px,
+    transparent 12px,
+    transparent 16px
+  );
+}
