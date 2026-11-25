@@ -405,22 +405,3 @@ for untrusted code** — use Docker mode.
 MIT — see [LICENSE](LICENSE).
 
 ---
-
-## Upload to GitHub
-
-No git repository was initialized in this workspace. From the project root:
-
-```bash
-git init
-git add .
-git status                 # confirm no .env, database, workspace or token is staged
-git commit -m "Initial commit: AutoDev autonomous coding agent"
-git branch -M main
-git remote add origin https://github.com/<your-user>/<your-repo>.git
-git push -u origin main
-```
-
-Replace the remote URL with your repository. If the remote already has commits, pull/rebase before
-pushing. Never commit `.env`, `backend/autodev.db`, `data/` or generated workspaces — `.gitignore`
-already excludes them. After pushing, replace `OWNER/autodev` in the badges above and add real
-screenshots.
