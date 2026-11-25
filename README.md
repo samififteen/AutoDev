@@ -403,5 +403,3 @@ for untrusted code** — use Docker mode.
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
----
